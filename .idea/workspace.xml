@@ -1,7 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="" />
+    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="28 June commit">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/qpai-training.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/qpai-training.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/KylieBaseline_spectra.hdf5" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/KylieBaseline_spectra.hdf5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/detection_geometries/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/detection_geometries/curved_array.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/detection_geometries/detection_geometry_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/detection_geometries/linear_array.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/detection_geometries/planar_array.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/digital_device_twin_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/disk_illumination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/gaussian_beam_illumination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/illumination_geometry_base.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/ithera_msot_acuity_illumination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/ithera_msot_invision_illumination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/pencil_array_illumination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/pencil_beam_illumination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/illumination_geometries/slit_illumination.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/pa_devices/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/pa_devices/ithera_msot_acuity.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/pa_devices/ithera_msot_invision.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/device_digital_twins/pa_devices/ithera_rsom.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/field_of_view_cropping.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/iterative_qPAI_algorithm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/noise/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/noise/gamma_noise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/noise/gaussian_noise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/noise/poisson_noise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/noise/salt_and_pepper_noise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/monospectral/noise/uniform_noise.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/multispectral/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/processing_components/multispectral/linear_unmixing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/acoustic_forward_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/acoustic_forward_module/acoustic_forward_model_test_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/acoustic_forward_module/acoustic_forward_module_k_wave_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/acoustic_forward_module/simulate_2D.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/acoustic_forward_module/simulate_3D.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/optical_simulation_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/optical_simulation_module/optical_forward_model_mcx_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/optical_simulation_module/optical_forward_model_mcx_reflectance_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/optical_simulation_module/optical_forward_model_test_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/reconstruction_module_delay_and_sum_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/reconstruction_module_delay_multiply_and_sum_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/reconstruction_module_signed_delay_multiply_and_sum_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/reconstruction_module_test_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/reconstruction_module_time_reversal_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/reconstruction_utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/time_reversal_2D.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/reconstruction_module/time_reversal_3D.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/volume_creation_module/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/volume_creation_module/volume_creation_module_model_based_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/core/simulation_modules/volume_creation_module/volume_creation_module_segmentation_based_adapter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/io_handling/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/io_handling/io_hdf5.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/io_handling/ipasc.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/io_handling/serialization.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/io_handling/zenodo_download.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/log/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/log/file_logger.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/calculate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/constants.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/deformation_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/dict_path_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Copper_Sulphide.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Deoxyhemoglobin.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Fat.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Melanin.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Nickel_Sulphide.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Oxyhemoglobin.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Skin_Baseline.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/Water.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/absorption_spectra_data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/anisotropy_spectra_data/Epidermis_Anisotropy.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/anisotropy_spectra_data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/literature_values.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/molecule_library.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/scattering_spectra_data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/scattering_spectra_data/background_scattering.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/scattering_spectra_data/blood_scattering.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/scattering_spectra_data/bone_scattering.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/scattering_spectra_data/fat_scattering.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/scattering_spectra_data/muscle_scattering.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/spectrum_library.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/BackgroundStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/CircularTubularStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/EllipticalTubularStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/HorizontalLayerStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/ParallelepipedStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/RectangularCuboidStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/SphericalStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/StructureBase.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/VesselStructure.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/structure_library/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/libraries/tissue_library.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/path_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/quality_assurance/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/quality_assurance/data_sanity_testing.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/serializer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/tags.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/utils/tissue_properties.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/visualisation/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/visualisation/matplotlib_data_visualisation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/simpa/visualisation/matplotlib_device_visualisation.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,11 +137,94 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/yeung01/PycharmProjects/qpai-training/kylie",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.minimal_optical_simulation">
+    <configuration name="ImportData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="qpai-training" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/ImportData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="kylie_baseline_sim" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="qpai-training" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="minimal_optical_simulation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="qpai-training" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/minimal_optical_simulation.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.minimal_optical_simulation" />
+        <item itemvalue="Python.kylie_baseline_sim" />
+        <item itemvalue="Python.ImportData" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -34,10 +234,40 @@
       <option name="presentableId" value="Default" />
       <updated>1655287732858</updated>
       <workItem from="1655287734141" duration="29000" />
+      <workItem from="1656427481270" duration="968000" />
+      <workItem from="1656429118301" duration="2159000" />
     </task>
+    <task id="LOCAL-00001" summary="28 June commit">
+      <created>1656427835383</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1656427835383</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="28 June commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="28 June commit" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/qpai_training$minimal_optical_simulation.coverage" NAME="minimal_optical_simulation Coverage Results" MODIFIED="1656430961448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$ImportData.coverage" NAME="ImportData Coverage Results" MODIFIED="1656427994647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$kylie_baseline_sim.coverage" NAME="kylie_baseline_sim Coverage Results" MODIFIED="1656430480140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
   </component>
 </project>

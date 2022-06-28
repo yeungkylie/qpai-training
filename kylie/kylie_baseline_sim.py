@@ -1,8 +1,6 @@
 from simpa.utils import Tags
 import simpa as sp
 import numpy as np
-from simpa.io_handling import load_hdf5
-from simpa.utils import get_data_field_from_simpa_output
 
 # FIXME temporary workaround for newest Intel architectures
 import os
