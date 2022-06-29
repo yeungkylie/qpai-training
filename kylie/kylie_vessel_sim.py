@@ -1,11 +1,12 @@
 from simpa.utils import Tags
 import simpa as sp
 import numpy as np
+import utils.plot_vessel_tree
 
 # FIXME temporary workaround for newest Intel architectures
 import os
 import time
-start_time = time.time()  #calculate runtime
+start_time = time.time()  # calculate runtime
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -13,8 +14,8 @@ VOLUME_TRANSDUCER_DIM_IN_MM = 19.2  # 64 pixels
 VOLUME_PLANAR_DIM_IN_MM = 19.2
 VOLUME_HEIGHT_IN_MM = 9.6
 SPACING = 0.3
-NUM_VERTICAL_COMPARTMENTS = 3
-NUM_HORIZONTAL_COMPARTMENTS = 2
+NUM_VERTICAL_COMPARTMENTS = 2
+NUM_HORIZONTAL_COMPARTMENTS = 1
 # WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
 WAVELENGTHS = [800]
 NUM_SIMULATIONS = 1
@@ -38,7 +39,7 @@ def create_example_tissue():
     # constant bvf and oxy in baseline simulation
     blood_volume_fraction = 0.01
     oxy = 0.7
-    tissue_dict["muscle"] = sp.define_horizontal_layer_structure_settings(z_start_mm=SPACING, thickness_mm=100,
+    tissue_dict["muscle"] = sp.define_horizontal_layer_structure_settings(z_start_mm=0, thickness_mm=100,
                                                                           molecular_composition=
                                                                           sp.TISSUE_LIBRARY.muscle(
                                                                               oxy, blood_volume_fraction),
@@ -50,7 +51,7 @@ def create_example_tissue():
         for horizontal_idx in range(NUM_HORIZONTAL_COMPARTMENTS):
             idx = vertical_idx * NUM_HORIZONTAL_COMPARTMENTS + horizontal_idx
             # Randomising whether this compartment contains a vessel
-            vessel_probability = 0.5
+            vessel_probability = 1
             vessel_randomisation = np.random.random()
             if vessel_randomisation < vessel_probability:
                 # randomise the radius to be somewhere between e.g. 0.3 and 2 mm
@@ -68,13 +69,18 @@ def create_example_tissue():
                 start_z, end_z = (min_z - max_z) * np.random.random(2) + max_z
                     # Draw another random variable for the oxygen saturation for each vessel between 0 and 1
                 vessel_oxy_sat = np.random.random()
-                tissue_dict[f"vessel_{idx}"] = sp.define_circular_tubular_structure_settings(
-                    tube_start_mm=[start_x, 0, start_z],
-                    tube_end_mm=[end_x, VOLUME_PLANAR_DIM_IN_MM, end_z],
+                tissue_dict[f"vessel_{idx}"] = sp.define_vessel_structure_settings(
+                    vessel_start_mm=[start_x, 0, start_z],
+                    vessel_direction_mm=[0,1,0],
                     molecular_composition=sp.TISSUE_LIBRARY.blood(oxygenation=vessel_oxy_sat),
-                    radius_mm=tube_radius, priority=3, consider_partial_volume=True,
+                    radius_mm=tube_radius,
+                    curvature_factor=0.05,#0.05
+                    radius_variation_factor=1,  # 1
+                    bifurcation_length_mm=2,  # 7
+                    priority=3, consider_partial_volume=True,
                     adhere_to_deformation=False
                 )
+                utils.plot_vessel_tree.plot_vessel_tree(settings, tissue_dict[f"vessel_{idx}"], idx)  # storing the vessel shape for ref
     return tissue_dict
 
 
@@ -135,6 +141,6 @@ for simulation_idx in range(NUM_SIMULATIONS):
                       show_initial_pressure=True,
                       show_absorption=True,
                       log_scale=True,
-                      show_xz_only=True)
+                      show_xz_only=False)
 
     print("--- %s seconds ---" % (time.time() - start_time))
