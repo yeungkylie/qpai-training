@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="new script for simulation of vessel , visualisation tool copied from IMSY github">
-      <change afterPath="$PROJECT_DIR$/kylie/kylie_vessel_sim.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_0.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/plot_vessel_tree.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/save_directory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils/vessel_tree.py" afterDir="false" />
+    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_0.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_1.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +53,7 @@
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.kylie_vessel_sim">
+  <component name="RunManager" selected="Python.kylie_baseline_sim">
     <configuration name="kylie_baseline_sim" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,9 +166,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.kylie_baseline_sim" />
         <item itemvalue="Python.kylie_vessel_sim" />
         <item itemvalue="Python.vessel_tree" />
-        <item itemvalue="Python.kylie_baseline_sim" />
         <item itemvalue="Python.scratch" />
         <item itemvalue="Python.minimal_optical_simulation" />
       </list>
@@ -190,7 +185,7 @@
       <workItem from="1655287734141" duration="29000" />
       <workItem from="1656427481270" duration="968000" />
       <workItem from="1656429118301" duration="2235000" />
-      <workItem from="1656494148479" duration="18563000" />
+      <workItem from="1656494148479" duration="19499000" />
     </task>
     <task id="LOCAL-00001" summary="28 June commit">
       <created>1656427835383</created>
@@ -213,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656499800272</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new script for simulation of vessel , visualisation tool copied from IMSY github">
+      <created>1656516569637</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1656516569637</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,11 +240,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="new script for simulation of vessel , visualisation tool copied from IMSY github" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/qpai_training$kylie_vessel_sim.coverage" NAME="kylie_vessel_sim Coverage Results" MODIFIED="1656516433547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$kylie_vessel_sim.coverage" NAME="kylie_vessel_sim Coverage Results" MODIFIED="1656516625878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$vessel_tree.coverage" NAME="vessel_tree Coverage Results" MODIFIED="1656514330554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$minimal_optical_simulation.coverage" NAME="minimal_optical_simulation Coverage Results" MODIFIED="1656494947278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1656498301482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/qpai_training$ImportData.coverage" NAME="ImportData Coverage Results" MODIFIED="1656427994647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
-    <SUITE FILE_PATH="coverage/qpai_training$kylie_baseline_sim.coverage" NAME="kylie_baseline_sim Coverage Results" MODIFIED="1656506112903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$kylie_baseline_sim.coverage" NAME="kylie_baseline_sim Coverage Results" MODIFIED="1656517388632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
   </component>
 </project>

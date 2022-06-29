@@ -4,8 +4,7 @@ import numpy as np
 
 # FIXME temporary workaround for newest Intel architectures
 import os
-import time
-start_time = time.time()  #calculate runtime
+
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
@@ -15,9 +14,9 @@ VOLUME_HEIGHT_IN_MM = 9.6
 SPACING = 0.3
 NUM_VERTICAL_COMPARTMENTS = 3
 NUM_HORIZONTAL_COMPARTMENTS = 2
-# WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
-WAVELENGTHS = [800]
-NUM_SIMULATIONS = 1
+WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
+# WAVELENGTHS = [800]
+NUM_SIMULATIONS = 10
 
 path_manager = sp.PathManager()
 
@@ -55,18 +54,18 @@ def create_example_tissue():
             if vessel_randomisation < vessel_probability:
                 # randomise the radius to be somewhere between e.g. 0.3 and 2 mm
                 lower_tube_radius = 0.3
-                upper_tube_radius = 2
+                upper_tube_radius = 1.5
                 tube_radius = (lower_tube_radius - upper_tube_radius) * np.random.random() + upper_tube_radius
                 # Define min and max of x and z based on VOLUME_TRANSDUCER_DIM_IN_MM (x)
                 # and VOLUME_HEIGHT_IN_MM (z), ensuring no overlap and no out of bounds
                 max_x = (VOLUME_TRANSDUCER_DIM_IN_MM * (horizontal_idx + 1) / NUM_HORIZONTAL_COMPARTMENTS) - tube_radius
                 max_z = (VOLUME_HEIGHT_IN_MM * (vertical_idx + 1) / NUM_VERTICAL_COMPARTMENTS) - tube_radius
                 min_x = (max_x - VOLUME_TRANSDUCER_DIM_IN_MM / NUM_HORIZONTAL_COMPARTMENTS) + 2*tube_radius
-                min_z = (max_z - VOLUME_HEIGHT_IN_MM / NUM_VERTICAL_COMPARTMENTS) + 2*tube_radius
+                min_z = (max_z - (VOLUME_HEIGHT_IN_MM-SPACING) / NUM_VERTICAL_COMPARTMENTS) + SPACING + 2*tube_radius
                 # Then create two random variables for the x and z position. The y position is already set correctly
                 start_x, end_x = (min_x - max_x) * np.random.random(2) + max_x
                 start_z, end_z = (min_z - max_z) * np.random.random(2) + max_z
-                    # Draw another random variable for the oxygen saturation for each vessel between 0 and 1
+                # Draw another random variable for the oxygen saturation for each vessel between 0 and 1
                 vessel_oxy_sat = np.random.random()
                 tissue_dict[f"vessel_{idx}"] = sp.define_circular_tubular_structure_settings(
                     tube_start_mm=[start_x, 0, start_z],
@@ -136,5 +135,3 @@ for simulation_idx in range(NUM_SIMULATIONS):
                       show_absorption=True,
                       log_scale=True,
                       show_xz_only=True)
-
-    print("--- %s seconds ---" % (time.time() - start_time))
