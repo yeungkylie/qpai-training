@@ -16,7 +16,7 @@ NUM_VERTICAL_COMPARTMENTS = 3
 NUM_HORIZONTAL_COMPARTMENTS = 2
 WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
 # WAVELENGTHS = [800]  # one wavelength for testing
-NUM_SIMULATIONS = 1
+NUM_SIMULATIONS = 501
 
 path_manager = sp.PathManager()
 
@@ -85,7 +85,7 @@ for simulation_idx in range(NUM_SIMULATIONS):
     # Every volume needs a distinct random seed.
     RANDOM_SEED = int(1e4 + simulation_idx)
     np.random.seed(RANDOM_SEED)
-    VOLUME_NAME = "KylieBaseline_" + str(RANDOM_SEED)
+    VOLUME_NAME = "Kylie5mmIllumination_" + str(RANDOM_SEED)
 
     general_settings = {
         # These parameters set the general properties of the simulated volume
@@ -120,7 +120,7 @@ for simulation_idx in range(NUM_SIMULATIONS):
     device = sp.PhotoacousticDevice(device_position_mm=np.array([VOLUME_TRANSDUCER_DIM_IN_MM / 2,
                                                                  VOLUME_PLANAR_DIM_IN_MM / 2,
                                                                  0]))
-    device.add_illumination_geometry(sp.GaussianBeamIlluminationGeometry(beam_radius_mm=20))
+    device.add_illumination_geometry(sp.GaussianBeamIlluminationGeometry(beam_radius_mm=5))
 
     SIMULATION_PIPELINE = [
         sp.ModelBasedVolumeCreationAdapter(settings),

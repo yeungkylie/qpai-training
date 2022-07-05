@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/kylie/kylie_5mm_illum.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kylie/kylie_point_illum.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kevin/ImportData.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kevin/flowphantom_simulations_inVision.py" beforeDir="false" afterPath="$PROJECT_DIR$/kevin/flowphantom_simulations_inVision.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/ExtractSpectra.py" beforeDir="false" afterPath="$PROJECT_DIR$/kevin/ExtractSpectra.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/ImportData.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/ImportData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/KylieBaseline_spectra.hdf5" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/KylieBaseline_spectra.hdf5" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/kylie_vessel_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/kylie_vessel_sim.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/plot_vessel_tree.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/plot_vessel_tree.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,31 +37,76 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/yeung01/PycharmProjects/qpai-training/kylie",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yeung01/PycharmProjects/qpai-training/kylie&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "JupyterPython"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;JupyterPython&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kevin" />
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.kylie_baseline_sim">
+  <component name="RunManager" selected="Python.show_image">
+    <configuration name="ImportData (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="qpai-training" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/ImportData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ImportData" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="qpai-training" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kevin" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kevin/ImportData.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="kylie_baseline_sim" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -67,28 +121,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/kylie_baseline_sim.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="kylie_vessel_sim" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="qpai-training" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/kylie_vessel_sim.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,35 +173,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="vessel_tree" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="qpai-training" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\yeung01\PycharmProjects\qpai-training\utils\vessel_tree.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.kylie_baseline_sim" />
         <item itemvalue="Python.show_image" />
-        <item itemvalue="Python.kylie_vessel_sim" />
-        <item itemvalue="Python.vessel_tree" />
         <item itemvalue="Python.scratch" />
+        <item itemvalue="Python.ImportData (1)" />
+        <item itemvalue="Python.ImportData" />
+        <item itemvalue="Python.kylie_baseline_sim" />
       </list>
     </recent_temporary>
   </component>
@@ -185,7 +195,11 @@
       <workItem from="1656427481270" duration="968000" />
       <workItem from="1656429118301" duration="2235000" />
       <workItem from="1656494148479" duration="20295000" />
-      <workItem from="1656581049920" duration="1923000" />
+      <workItem from="1656581049920" duration="12479000" />
+      <workItem from="1656600640538" duration="646000" />
+      <workItem from="1656667487754" duration="3093000" />
+      <workItem from="1657012391507" duration="11768000" />
+      <workItem from="1657027210593" duration="371000" />
     </task>
     <task id="LOCAL-00001" summary="28 June commit">
       <created>1656427835383</created>
@@ -222,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656517618828</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="minor updates">
+      <created>1656582992952</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1656582992952</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -248,12 +269,16 @@
     <option name="LAST_COMMIT_MESSAGE" value="minor updates" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/qpai_training$kylie_vessel_sim.coverage" NAME="kylie_vessel_sim Coverage Results" MODIFIED="1656516625878" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$kylie_vessel_sim.coverage" NAME="kylie_vessel_sim Coverage Results" MODIFIED="1656600664251" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$vessel_tree.coverage" NAME="vessel_tree Coverage Results" MODIFIED="1656514330554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$kylie_5mm_illum.coverage" NAME="kylie_5mm_illum Coverage Results" MODIFIED="1657014437298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$minimal_optical_simulation.coverage" NAME="minimal_optical_simulation Coverage Results" MODIFIED="1656494947278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
-    <SUITE FILE_PATH="coverage/qpai_training$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1656498301482" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/qpai_training$show_image.coverage" NAME="show_image Coverage Results" MODIFIED="1656581850142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/qpai_training$ImportData.coverage" NAME="ImportData Coverage Results" MODIFIED="1656427994647" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
-    <SUITE FILE_PATH="coverage/qpai_training$kylie_baseline_sim.coverage" NAME="kylie_baseline_sim Coverage Results" MODIFIED="1656582922864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1657027490797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/qpai_training$kylie_point_illum.coverage" NAME="kylie_point_illum Coverage Results" MODIFIED="1657014760676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$show_image.coverage" NAME="show_image Coverage Results" MODIFIED="1657014712241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/qpai_training$flowphantom_simulations_inVision.coverage" NAME="flowphantom_simulations_inVision Coverage Results" MODIFIED="1657016431551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kevin" />
+    <SUITE FILE_PATH="coverage/qpai_training$ImportData.coverage" NAME="ImportData Coverage Results" MODIFIED="1657019640769" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kevin" />
+    <SUITE FILE_PATH="coverage/qpai_training$ImportData__1_.coverage" NAME="ImportData (1) Coverage Results" MODIFIED="1657027503540" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$kylie_baseline_sim.coverage" NAME="kylie_baseline_sim Coverage Results" MODIFIED="1657018134426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
   </component>
 </project>

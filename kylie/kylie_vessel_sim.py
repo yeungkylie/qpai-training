@@ -1,7 +1,7 @@
 from simpa.utils import Tags
 import simpa as sp
 import numpy as np
-import utils.plot_vessel_tree
+import utils.plot_vessel_tree as plt_vessels
 
 # FIXME temporary workaround for newest Intel architectures
 import os
@@ -12,10 +12,10 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 VOLUME_TRANSDUCER_DIM_IN_MM = 19.2  # 64 pixels
 VOLUME_PLANAR_DIM_IN_MM = 19.2
-VOLUME_HEIGHT_IN_MM = 9.6
+VOLUME_HEIGHT_IN_MM = 19.2
 SPACING = 0.3
-NUM_VERTICAL_COMPARTMENTS = 2
-NUM_HORIZONTAL_COMPARTMENTS = 1
+NUM_VERTICAL_COMPARTMENTS = 3
+NUM_HORIZONTAL_COMPARTMENTS = 2
 # WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
 WAVELENGTHS = [800]
 NUM_SIMULATIONS = 1
@@ -55,7 +55,7 @@ def create_example_tissue():
             vessel_randomisation = np.random.random()
             if vessel_randomisation < vessel_probability:
                 # randomise the radius to be somewhere between e.g. 0.3 and 2 mm
-                lower_tube_radius = 0.3
+                lower_tube_radius = 0.5
                 upper_tube_radius = 2
                 tube_radius = (lower_tube_radius - upper_tube_radius) * np.random.random() + upper_tube_radius
                 # Define min and max of x and z based on VOLUME_TRANSDUCER_DIM_IN_MM (x)
@@ -69,18 +69,20 @@ def create_example_tissue():
                 start_z, end_z = (min_z - max_z) * np.random.random(2) + max_z
                     # Draw another random variable for the oxygen saturation for each vessel between 0 and 1
                 vessel_oxy_sat = np.random.random()
+                start_y = np.random.randint(2)*VOLUME_PLANAR_DIM_IN_MM  # start from either end of y
                 tissue_dict[f"vessel_{idx}"] = sp.define_vessel_structure_settings(
-                    vessel_start_mm=[start_x, 0, start_z],
-                    vessel_direction_mm=[0,1,0],
+                    vessel_start_mm=[start_x, start_y, start_z],
+                    vessel_direction_mm=[0, abs(VOLUME_PLANAR_DIM_IN_MM - start_y), 0],  # make vessels grow towards the opposite direction
                     molecular_composition=sp.TISSUE_LIBRARY.blood(oxygenation=vessel_oxy_sat),
                     radius_mm=tube_radius,
-                    curvature_factor=0.05,#0.05
+                    curvature_factor=0.05, #0.05
                     radius_variation_factor=1,  # 1
                     bifurcation_length_mm=2,  # 7
                     priority=3, consider_partial_volume=True,
                     adhere_to_deformation=False
                 )
-                utils.plot_vessel_tree.plot_vessel_tree(settings, tissue_dict[f"vessel_{idx}"], idx)  # storing the vessel shape for ref
+        plt_vessels.plot_vessel_tree(settings, tissue_dict,
+                                     NUM_HORIZONTAL_COMPARTMENTS * NUM_VERTICAL_COMPARTMENTS)  # storing the vessel shape for ref
     return tissue_dict
 
 

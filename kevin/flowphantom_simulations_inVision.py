@@ -25,7 +25,7 @@ VOLUME_HEIGHT_IN_MM = 90
 SPACING = 0.5
 RANDOM_SEED = 471
 
-path_manager = PathManager("../simpa_examples")
+path_manager = sp.PathManager()
 
 
 def create_example_tissue(melanosome: float = 0., oxygenation: float = 0.9):
@@ -97,7 +97,7 @@ def create_example_tissue(melanosome: float = 0., oxygenation: float = 0.9):
 
 # MELANIN_LEVELS = [0.00, 0.005, 0.01, 0.015, 0.02]
 # OXYGEN_LEVELS = np.linspace(0, 1, 11)
-NUM_SAMPLES = 1000
+NUM_SAMPLES = 3
 # for n_sample in range(505,NUM_SAMPLES)
 n_sample = 505
 print("Computing run:", n_sample)
