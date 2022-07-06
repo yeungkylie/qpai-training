@@ -14,8 +14,8 @@ VOLUME_HEIGHT_IN_MM = 19.2
 SPACING = 0.3
 NUM_VERTICAL_COMPARTMENTS = 3
 NUM_HORIZONTAL_COMPARTMENTS = 2
-# WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
-WAVELENGTHS = [800]  # one wavelength for testing
+WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
+# WAVELENGTHS = [800]  # one wavelength for testing
 NUM_SIMULATIONS = 501
 
 path_manager = sp.PathManager()
