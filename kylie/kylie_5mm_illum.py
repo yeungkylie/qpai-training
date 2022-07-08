@@ -81,7 +81,7 @@ def create_example_tissue():
 # Seed the numpy random configuration prior to creating the global_settings file in
 # order to ensure that the same volume is generated with the same random seed every time.
 
-for simulation_idx in range(459, NUM_SIMULATIONS):
+for simulation_idx in range(470, NUM_SIMULATIONS):
     # Every volume needs a distinct random seed.
     RANDOM_SEED = int(1e4 + simulation_idx)
     np.random.seed(RANDOM_SEED)
