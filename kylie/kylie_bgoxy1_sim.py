@@ -8,10 +8,10 @@ import os
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-VOLUME_TRANSDUCER_DIM_IN_MM = 9.6  # 64 pixels
-VOLUME_PLANAR_DIM_IN_MM = 9.6
-VOLUME_HEIGHT_IN_MM = 9.6
-SPACING = 0.15
+VOLUME_TRANSDUCER_DIM_IN_MM = 19.2  # 64 pixels
+VOLUME_PLANAR_DIM_IN_MM = 19.2
+VOLUME_HEIGHT_IN_MM = 19.2
+SPACING = 0.3
 NUM_VERTICAL_COMPARTMENTS = 3
 NUM_HORIZONTAL_COMPARTMENTS = 2
 WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
@@ -37,7 +37,9 @@ def create_example_tissue():
 
     # constant bvf and oxy in baseline simulation
     blood_volume_fraction = 0.01
-    oxy = 0.7
+    lower_oxy = 0.6
+    upper_oxy = 0.8
+    oxy = (lower_oxy - upper_oxy) * np.random.random() + upper_oxy
     tissue_dict["muscle"] = sp.define_horizontal_layer_structure_settings(z_start_mm=SPACING, thickness_mm=100,
                                                                           molecular_composition=
                                                                           sp.TISSUE_LIBRARY.muscle(
@@ -54,8 +56,8 @@ def create_example_tissue():
             vessel_randomisation = np.random.random()
             if vessel_randomisation < vessel_probability:
                 # randomise the radius to be somewhere between e.g. 0.3 and 2 mm
-                lower_tube_radius = 0.15
-                upper_tube_radius = 1
+                lower_tube_radius = 0.3
+                upper_tube_radius = 2
                 tube_radius = (lower_tube_radius - upper_tube_radius) * np.random.random() + upper_tube_radius
                 # Define min and max of x and z based on VOLUME_TRANSDUCER_DIM_IN_MM (x)
                 # and VOLUME_HEIGHT_IN_MM (z), ensuring no overlap and no out of bounds
@@ -85,7 +87,7 @@ for simulation_idx in range(NUM_SIMULATIONS):
     # Every volume needs a distinct random seed.
     RANDOM_SEED = int(1e4 + simulation_idx)
     np.random.seed(RANDOM_SEED)
-    VOLUME_NAME = "KylieHighResSmallVess_" + str(RANDOM_SEED)
+    VOLUME_NAME = "KylieBG60-80_" + str(RANDOM_SEED)
 
     general_settings = {
         # These parameters set the general properties of the simulated volume
