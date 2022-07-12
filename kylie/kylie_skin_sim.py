@@ -14,8 +14,8 @@ VOLUME_HEIGHT_IN_MM = 19.2
 SPACING = 0.3
 NUM_VERTICAL_COMPARTMENTS = 3
 NUM_HORIZONTAL_COMPARTMENTS = 2
-WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
-# WAVELENGTHS = [800]  # one wavelength for testing
+# WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
+WAVELENGTHS = [800]  # one wavelength for testing
 NUM_SIMULATIONS = 500
 
 path_manager = sp.PathManager()
@@ -37,7 +37,7 @@ def create_example_tissue():
 
     # constant bvf and oxy in baseline simulation
     blood_volume_fraction = 0.01
-    oxy = np.random.random()
+    oxy = 0.7
     tissue_dict["muscle"] = sp.define_horizontal_layer_structure_settings(z_start_mm=SPACING, thickness_mm=100,
                                                                           molecular_composition=
                                                                           sp.TISSUE_LIBRARY.muscle(
@@ -45,6 +45,16 @@ def create_example_tissue():
                                                                           priority=1,
                                                                           consider_partial_volume=True,
                                                                           adhere_to_deformation=False)
+
+    lower_epi_thickness = 0.01
+    upper_epi_thickness = 0.4
+    epi_thickness = (lower_epi_thickness - upper_epi_thickness) * np.random.random() + upper_epi_thickness
+    tissue_dict["epidermis"] = sp.define_horizontal_layer_structure_settings(z_start_mm=SPACING, thickness_mm=epi_thickness,
+                                                                             molecular_composition=
+                                                                             sp.TISSUE_LIBRARY.epidermis(),
+                                                                             priority=8,
+                                                                             consider_partial_volume=True,
+                                                                             adhere_to_deformation=False)
 
     for vertical_idx in range(NUM_VERTICAL_COMPARTMENTS):
         for horizontal_idx in range(NUM_HORIZONTAL_COMPARTMENTS):
@@ -85,7 +95,7 @@ for simulation_idx in range(NUM_SIMULATIONS):
     # Every volume needs a distinct random seed.
     RANDOM_SEED = int(1e4 + simulation_idx)
     np.random.seed(RANDOM_SEED)
-    VOLUME_NAME = "KylieBG0-100_" + str(RANDOM_SEED)
+    VOLUME_NAME = "KylieSkin_" + str(RANDOM_SEED)
 
     general_settings = {
         # These parameters set the general properties of the simulated volume
