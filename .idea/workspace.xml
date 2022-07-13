@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/kylie/kylie_acousticmodelling.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kylie/kylie_heterogeneous_sim.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kylie/kylie_lowres2_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/kylie_lowres_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/kylie_lowres_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/kylie_skin_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/kylie_skin_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/prepare_simpa_simulations.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/prepare_simpa_simulations.py" afterDir="false" />
-    </list>
+    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,7 +193,7 @@
       <workItem from="1657119273695" duration="2253000" />
       <workItem from="1657121644449" duration="12314000" />
       <workItem from="1657620078748" duration="14228000" />
-      <workItem from="1657706035307" duration="2278000" />
+      <workItem from="1657706035307" duration="2597000" />
     </task>
     <task id="LOCAL-00001" summary="28 June commit">
       <created>1656427835383</created>
@@ -287,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657623639753</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="new skin script. spectra extraction and visualisation script from Janek">
+      <created>1657708472085</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1657708472085</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
