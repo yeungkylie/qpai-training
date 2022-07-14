@@ -249,7 +249,7 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
 
 
 if __name__ == "__main__":
-    SET_NAME = "Baseline"
+    SET_NAME = "Point Illumination"
     IN_PATH = f"D:/Kylie Simulations/{SET_NAME}/"
     OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)

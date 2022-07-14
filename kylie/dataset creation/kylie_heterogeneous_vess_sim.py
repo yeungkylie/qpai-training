@@ -18,6 +18,7 @@ WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
 # WAVELENGTHS = [800]  # one wavelength for testing
 NUM_SIMULATIONS = 500
 
+
 path_manager = sp.PathManager()
 
 # If VISUALIZE is set to True, the simulation result will be plotted
@@ -48,22 +49,51 @@ def create_example_tissue():
                                                                                                                   _max=0.8).get_map(),
                                                                               blood_volume_fraction=sp.RandomHeterogeneity(
                                                                                   dim_x, dim_y, dim_z, SPACING, _gaussian_blur_size_mm=BLUR_SIZE,
-                                                                                  _min= 1e-2, _max=0.1).get_map()),
+                                                                                  _min=1e-2, _max=0.1).get_map()),
                                                                           priority=1,
                                                                           consider_partial_volume=True,
                                                                           adhere_to_deformation=False)
 
+    for vertical_idx in range(NUM_VERTICAL_COMPARTMENTS):
+        for horizontal_idx in range(NUM_HORIZONTAL_COMPARTMENTS):
+            idx = vertical_idx * NUM_HORIZONTAL_COMPARTMENTS + horizontal_idx
+            # Randomising whether this compartment contains a vessel
+            vessel_probability = 0.5
+            vessel_randomisation = np.random.random()
+            if vessel_randomisation < vessel_probability:
+                # randomise the radius to be somewhere between e.g. 0.3 and 2 mm
+                lower_tube_radius = 0.3
+                upper_tube_radius = 2
+                tube_radius = (lower_tube_radius - upper_tube_radius) * np.random.random() + upper_tube_radius
+                # Define min and max of x and z based on VOLUME_TRANSDUCER_DIM_IN_MM (x)
+                # and VOLUME_HEIGHT_IN_MM (z), ensuring no overlap and no out of bounds
+                max_x = (VOLUME_TRANSDUCER_DIM_IN_MM * (horizontal_idx + 1) / NUM_HORIZONTAL_COMPARTMENTS) - tube_radius
+                max_z = (VOLUME_HEIGHT_IN_MM * (vertical_idx + 1) / NUM_VERTICAL_COMPARTMENTS) - tube_radius
+                min_x = (max_x - VOLUME_TRANSDUCER_DIM_IN_MM / NUM_HORIZONTAL_COMPARTMENTS) + 2*tube_radius
+                min_z = (max_z - (VOLUME_HEIGHT_IN_MM-SPACING) / NUM_VERTICAL_COMPARTMENTS) + SPACING + 2*tube_radius
+                # Then create two random variables for the x and z position. The y position is already set correctly
+                start_x, end_x = (min_x - max_x) * np.random.random(2) + max_x
+                start_z, end_z = (min_z - max_z) * np.random.random(2) + max_z
+                # Draw another random variable for the oxygen saturation for each vessel between 0 and 1
+                vessel_oxy_sat = np.random.random()
+                tissue_dict[f"vessel_{idx}"] = sp.define_circular_tubular_structure_settings(
+                    tube_start_mm=[start_x, 0, start_z],
+                    tube_end_mm=[end_x, VOLUME_PLANAR_DIM_IN_MM, end_z],
+                    molecular_composition=tissue_library.blood(vessel_oxy_sat),
+                    radius_mm=tube_radius, priority=3, consider_partial_volume=True,
+                    adhere_to_deformation=False
+                )
     return tissue_dict
 
 
 # Seed the numpy random configuration prior to creating the global_settings file in
 # order to ensure that the same volume is generated with the same random seed every time.
 
-for simulation_idx in range(2, NUM_SIMULATIONS):
+for simulation_idx in range(10, NUM_SIMULATIONS):
     # Every volume needs a distinct random seed.
     RANDOM_SEED = int(1e4 + simulation_idx)
     np.random.seed(RANDOM_SEED)
-    VOLUME_NAME = "KylieHeterogeneousNoVess_" + str(RANDOM_SEED)
+    VOLUME_NAME = "KylieHeterogeneous_" + str(RANDOM_SEED)
 
     general_settings = {
         # These parameters set the general properties of the simulated volume

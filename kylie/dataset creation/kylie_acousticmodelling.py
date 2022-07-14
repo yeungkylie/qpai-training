@@ -11,15 +11,19 @@ VOLUME_TRANSDUCER_DIM_IN_MM = 19.2
 VOLUME_PLANAR_DIM_IN_MM = 19.2
 VOLUME_HEIGHT_IN_MM = 19.2
 SPACING = 0.3
-RANDOM_SEED = 4711
+RANDOM_SEED = 0
+WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
 path_manager = sp.PathManager()
 
+VISUALIZE = True
+
 np.random.seed(RANDOM_SEED)
-VOLUME_NAME = "CompletePipelineTestMSOT_"+str(RANDOM_SEED)
+VOLUME_NAME = "KylieBaseline_"+str(1e4+RANDOM_SEED)
+
 general_settings = {
             # These parameters set the general properties of the simulated volume
             Tags.RANDOM_SEED: RANDOM_SEED,
-            Tags.VOLUME_NAME: "CompletePipelineExample_" + str(RANDOM_SEED),
+            Tags.VOLUME_NAME: "KylieBaseline_" + str(1e4+RANDOM_SEED),
             Tags.SIMULATION_PATH: path_manager.get_hdf5_file_save_path(),
             Tags.SPACING_MM: SPACING,
             Tags.DIM_VOLUME_Z_MM: VOLUME_HEIGHT_IN_MM,
@@ -71,3 +75,34 @@ settings.set_reconstruction_settings({
     Tags.DATA_FIELD_DENSITY: 1000,
     Tags.SPACING_MM: SPACING
 })
+device = sp.PhotoacousticDevice(device_position_mm=np.array([VOLUME_TRANSDUCER_DIM_IN_MM / 2,
+                                                             VOLUME_PLANAR_DIM_IN_MM / 2,
+                                                             0]),
+                                field_of_view_extent_mm=np.asarray([-15, 15, 0, 0, 0, 20]))
+device.set_detection_geometry(sp.LinearArrayDetectionGeometry(device_position_mm=device.device_position_mm,
+                                                              pitch_mm=0.25,
+                                                              number_detector_elements=50,
+                                                              field_of_view_extent_mm=np.asarray([-15, 15, 0, 0, 0, 20])))
+print(device.get_detection_geometry().get_detector_element_positions_base_mm())
+device.add_illumination_geometry(sp.GaussianBeamIlluminationGeometry(beam_radius_mm=20))
+
+SIMULATION_PIPELINE = [
+    sp.KWaveAdapter(settings),
+    sp.TimeReversalAdapter(settings),
+    ]
+
+sp.simulate(SIMULATION_PIPELINE, settings, device)
+
+if Tags.WAVELENGTH in settings:
+    WAVELENGTH = settings[Tags.WAVELENGTH]
+else:
+    WAVELENGTH = 700
+
+if VISUALIZE:
+    sp.visualise_data(path_to_hdf5_file=settings[Tags.SIMPA_OUTPUT_PATH],
+                      wavelength=WAVELENGTH,
+                      show_time_series_data=True,
+                      show_initial_pressure=True,
+                      show_reconstructed_data=True,
+                      log_scale=False,
+                      show_xz_only=False)

@@ -44,11 +44,11 @@ def create_example_tissue():
                                                                           tissue_library.muscle(background_oxy=sp.RandomHeterogeneity(dim_x,
                                                                                                                   dim_y, dim_z, SPACING,
                                                                                                                   _gaussian_blur_size_mm=BLUR_SIZE,
-                                                                                                                  _min=0.6,
-                                                                                                                  _max=0.8).get_map(),
+                                                                                                                  _min= 1e-5,
+                                                                                                                  _max= 1).get_map(),
                                                                               blood_volume_fraction=sp.RandomHeterogeneity(
                                                                                   dim_x, dim_y, dim_z, SPACING, _gaussian_blur_size_mm=BLUR_SIZE,
-                                                                                  _min= 1e-2, _max=0.1).get_map()),
+                                                                                  _min= 1e-2, _max=1).get_map()),
                                                                           priority=1,
                                                                           consider_partial_volume=True,
                                                                           adhere_to_deformation=False)
@@ -59,11 +59,11 @@ def create_example_tissue():
 # Seed the numpy random configuration prior to creating the global_settings file in
 # order to ensure that the same volume is generated with the same random seed every time.
 
-for simulation_idx in range(2, NUM_SIMULATIONS):
+for simulation_idx in range(4, NUM_SIMULATIONS):
     # Every volume needs a distinct random seed.
     RANDOM_SEED = int(1e4 + simulation_idx)
     np.random.seed(RANDOM_SEED)
-    VOLUME_NAME = "KylieHeterogeneousNoVess_" + str(RANDOM_SEED)
+    VOLUME_NAME = "KylieHeterogeneousNoVess2_" + str(RANDOM_SEED)
 
     general_settings = {
         # These parameters set the general properties of the simulated volume
