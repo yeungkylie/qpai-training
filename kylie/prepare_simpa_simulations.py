@@ -6,6 +6,8 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from scipy.ndimage import distance_transform_edt
 import time
+from sklearn.decomposition import PCA
+
 start_time = time.time()
 
 def normalise_sum_to_one(a):
@@ -26,10 +28,10 @@ def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int =
         print(filename)
         settings = sp.load_data_field(file, sp.Tags.SETTINGS)
         wavelengths = settings[sp.Tags.WAVELENGTHS]
+
         segmentation_classes = sp.load_data_field(file, sp.Tags.DATA_FIELD_SEGMENTATION)
         if target_tissue_class == 3:
             distances = distance_transform_edt(segmentation_classes == target_tissue_class)
-            distances = distances / np.max(distances)
         else:
             distances = np.ones_like(segmentation_classes)
 
@@ -37,6 +39,7 @@ def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int =
         for z_layer in range(np.shape(depths)[2]):
             depths[:, :, z_layer] = z_layer
         depths = depths / np.max(depths)
+
         oxygenation = sp.load_data_field(file, sp.Tags.DATA_FIELD_OXYGENATION)
 
         initial_pressure = []
@@ -148,6 +151,12 @@ def combine_spectra_files(folder_or_filename, target_file):
             else:
                 background_oxygenation = np.hstack([background_oxygenation, _bg_oxy])
 
+    n_spectra = np.apply_along_axis(normalise_sum_to_one, 0,
+                                    spectra)  # find principal components from normalised spectra
+    pca = PCA(n_components=2)
+    pca.fit(n_spectra.T)
+    pca_components = pca.transform(n_spectra.T)
+
     folders = os.path.dirname(target_file)
     if not os.path.exists(folders):
         os.makedirs(folders)
@@ -159,8 +168,8 @@ def combine_spectra_files(folder_or_filename, target_file):
              melanin_concentration=melanin_concentration,
              background_oxygenation=background_oxygenation,
              depths=depths,
-             distances=distances
-             )
+             distances=distances,
+             pca_components=pca_components)
 
 
 def load_spectra_file(file_path: str) -> tuple:
@@ -173,9 +182,10 @@ def load_spectra_file(file_path: str) -> tuple:
     depths = data["depths"]
     melanin_concentration = data["melanin_concentration"]
     background_oxygenation = data["background_oxygenation"]
+    pca_components = data["pca_components"]
     print("Loading data...[DONE]")
     return (wavelengths, oxygenations, spectra, melanin_concentration,
-            background_oxygenation, distances, depths)
+            background_oxygenation, distances, depths, pca_components)
 
 
 def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets=5, num_samples=100):
@@ -248,16 +258,37 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
     plt.show()
 
 
-if __name__ == "__main__":
-    SET_NAME = "Point Illumination"
+def visualise_PCA(pca_components, colorcode):
+    fig, ax = plt.subplots()
+    cm = plt.cm.plasma
+    sc = ax.scatter(pca_components[:, 0], pca_components[:, 1], c=colorcode, cmap=cm, s=5)
+    plt.colorbar(sc)
+    plt.show()
+
+def extract_spectra(SET_NAME):
+    print(f"--- extracting data from {SET_NAME} ---")
     IN_PATH = f"D:/Kylie Simulations/{SET_NAME}/"
     OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
     combine_spectra_files(IN_PATH, OUT_FILE)
     r_wavelengths, r_oxygenations, r_spectra, \
         r_melanin_concentration, r_background_oxygenation,\
-        r_distances, r_depths = load_spectra_file(OUT_FILE)
+        r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
     visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
                       r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
+    visualise_PCA(r_pca_components, r_oxygenations)
+
+if __name__ == "__main__":
+    SET_NAME = "1.2mm Res"
+    IN_PATH = f"D:/Kylie Simulations/{SET_NAME}/"
+    OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
+    read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
+    combine_spectra_files(IN_PATH, OUT_FILE)
+    r_wavelengths, r_oxygenations, r_spectra, \
+        r_melanin_concentration, r_background_oxygenation,\
+        r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
+    visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
+                      r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
+    visualise_PCA(r_pca_components, r_oxygenations)
 
 print("--- %s seconds ---" % (time.time() - start_time))
