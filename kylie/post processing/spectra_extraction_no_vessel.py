@@ -268,7 +268,8 @@ def extract_spectra(SET_NAME):
     print(f"--- extracting data from {SET_NAME} ---")
     IN_PATH = f"I:/research/seblab/data/group_folders/Kylie/{SET_NAME}/"
     OUT_FILE = f"I:/research/seblab/data/group_folders/Kylie/{SET_NAME}/{SET_NAME}_spectra.npz"
-    read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
+    # no target tissue class for vessel-less extraction
+    read_hdf5_and_extract_spectra(IN_PATH)
     combine_spectra_files(IN_PATH, OUT_FILE)
     r_wavelengths, r_oxygenations, r_spectra, \
         r_melanin_concentration, r_background_oxygenation,\
@@ -278,7 +279,6 @@ def extract_spectra(SET_NAME):
     visualise_PCA(r_pca_components, r_oxygenations)
 
 if __name__ == "__main__":
-    extract_spectra("Heterogeneous with vessels")
     extract_spectra("Heterogeneous 60-80")
     extract_spectra("Heterogeneous 0-100")
 

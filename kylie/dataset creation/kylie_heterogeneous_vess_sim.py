@@ -16,7 +16,7 @@ NUM_VERTICAL_COMPARTMENTS = 3
 NUM_HORIZONTAL_COMPARTMENTS = 2
 WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
 # WAVELENGTHS = [800]  # one wavelength for testing
-NUM_SIMULATIONS = 500
+NUM_SIMULATIONS = 1
 
 
 path_manager = sp.PathManager()
@@ -89,7 +89,7 @@ def create_example_tissue():
 # Seed the numpy random configuration prior to creating the global_settings file in
 # order to ensure that the same volume is generated with the same random seed every time.
 
-for simulation_idx in range(10, NUM_SIMULATIONS):
+for simulation_idx in range(NUM_SIMULATIONS):
     # Every volume needs a distinct random seed.
     RANDOM_SEED = int(1e4 + simulation_idx)
     np.random.seed(RANDOM_SEED)

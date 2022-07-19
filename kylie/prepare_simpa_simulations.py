@@ -265,22 +265,22 @@ def visualise_PCA(pca_components, colorcode):
     plt.colorbar(sc)
     plt.show()
 
-def extract_spectra(SET_NAME):
-    print(f"--- extracting data from {SET_NAME} ---")
-    IN_PATH = f"D:/Kylie Simulations/{SET_NAME}/"
-    OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
-    read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
-    combine_spectra_files(IN_PATH, OUT_FILE)
-    r_wavelengths, r_oxygenations, r_spectra, \
-        r_melanin_concentration, r_background_oxygenation,\
-        r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
-    visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
-                      r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
-    visualise_PCA(r_pca_components, r_oxygenations)
+# def extract_spectra(SET_NAME):
+#     print(f"--- extracting data from {SET_NAME} ---")
+#     IN_PATH = f"I:/research\seblab\data\group_folders\Kylie/{SET_NAME}/"
+#     OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
+#     read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
+#     combine_spectra_files(IN_PATH, OUT_FILE)
+#     r_wavelengths, r_oxygenations, r_spectra, \
+#         r_melanin_concentration, r_background_oxygenation,\
+#         r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
+#     visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
+#                       r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
+#     visualise_PCA(r_pca_components, r_oxygenations)
 
 if __name__ == "__main__":
-    SET_NAME = "1.2mm Res"
-    IN_PATH = f"D:/Kylie Simulations/{SET_NAME}/"
+    SET_NAME = "Heterogeneous with vessels"
+    IN_PATH = f"I:/research\seblab\data\group_folders\Kylie/{SET_NAME}/"
     OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
     combine_spectra_files(IN_PATH, OUT_FILE)
