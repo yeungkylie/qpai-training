@@ -4,6 +4,7 @@ import simpa as sp
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import scale
 from scipy.ndimage import distance_transform_edt
 import time
 from sklearn.decomposition import PCA
@@ -188,10 +189,11 @@ def load_spectra_file(file_path: str) -> tuple:
             background_oxygenation, distances, depths, pca_components)
 
 
-def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets=5, num_samples=100):
-    print("Normalising data...")
-    spectra = np.apply_along_axis(normalise_sum_to_one, 0, spectra)
-    print("Normalising data...[Done]")
+def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets=5, num_samples=100, normalise=True):
+    if normalise:
+        print("Normalising data...")
+        spectra = np.apply_along_axis(normalise_sum_to_one, 0, spectra)
+        print("Normalising data...[Done]")
     num_y_plots = 2
     if melanin is not None and str(melanin) != "None":
         melanin = 1 - ((melanin - np.min(melanin)) / (np.max(melanin) - np.min(melanin)))
@@ -279,16 +281,16 @@ def visualise_PCA(pca_components, colorcode):
 #     visualise_PCA(r_pca_components, r_oxygenations)
 
 if __name__ == "__main__":
-    SET_NAME = "Heterogeneous with vessels"
+    SET_NAME = "Baseline"
     IN_PATH = f"I:/research\seblab\data\group_folders\Kylie/{SET_NAME}/"
     OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
-    read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
-    combine_spectra_files(IN_PATH, OUT_FILE)
+    # read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
+    # combine_spectra_files(IN_PATH, OUT_FILE)
     r_wavelengths, r_oxygenations, r_spectra, \
         r_melanin_concentration, r_background_oxygenation,\
         r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
     visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
-                      r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
+                      r_distances, r_depths, num_sO2_brackets=4, num_samples=300, normalise=False)
     visualise_PCA(r_pca_components, r_oxygenations)
 
 print("--- %s seconds ---" % (time.time() - start_time))
