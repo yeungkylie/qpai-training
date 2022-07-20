@@ -6,6 +6,7 @@ import os
 from sklearn.model_selection import KFold
 import pickle
 import time
+from kylie import spectra_extraction_no_vessel as s
 start_time = time.time()
 
 def get_normalised_spectra_oxy(SET_NAME, process, visualise):
@@ -53,17 +54,19 @@ def train_random_forests(SET_NAME, process=None, visualise=False):
         pickle.dump(rfr, open(os.path.join(OUT_FOLDER, OUT_FILE), 'wb'))  # save each fold
     mean_score = np.mean(scores)
     mean_mse = np.mean(mse)
+    np.savez(os.path.join(OUT_FOLDER, f"{SET_NAME}_{process}_metrics.npz"),
+             scores=scores, mse=mse, mean_score=mean_score, mean_MSE=mean_mse)
     print(f"Averaged score: {np.mean(scores)}")  # metric combining r-score of all folds
     print(f"Averaged MSE: {np.mean(mse)}")  # metric combining mse of all folds
     return mean_score, mean_mse
 
 
-def aggregated_model(SET_NAME, input_spectra, target_oxy=None):
+def aggregated_model(SET_NAME, input_spectra, process=None, target_oxy=None):
     rfr = []
     ypred = []
-    OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models/"  # where the models are stored
+    OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models/{SET_NAME}"  # where the models are stored
     for idx in range(5):  # for each fold
-        rfr_idx = pickle.load(open(os.path.join(OUT_FOLDER, f"{SET_NAME}_rf{idx}.sav"), 'rb'))
+        rfr_idx = pickle.load(open(os.path.join(OUT_FOLDER, f"{SET_NAME}_{process}_rf{idx}.sav"), 'rb'))
         rfr.append(rfr_idx)
         ypred_idx = rfr[idx].predict(input_spectra)
         ypred.append(ypred_idx)
@@ -73,12 +76,15 @@ def aggregated_model(SET_NAME, input_spectra, target_oxy=None):
     if target_oxy is not None:
         mse = mean_squared_error(target_oxy, final_prediction)
         print(f"MSE {mse}")
+    return mse
 
 
 if __name__ == "__main__":
-    score, mse = train_random_forests("Baseline", visualise=True)
-    score_thresholded, mse_thresholded = train_random_forests("Baseline", process="thresholded", visualise=True)
-    score_smoothed, mse_smoothed = train_random_forests("Baseline", process="smoothed", visualise=True)
-    score_noised, mse_noised = train_random_forests("Baseline", process="noised", visualise=True)
-    # aggregated_model(spectra[0:6], oxy[0:6])
+    # score, mse = train_random_forests("Baseline", visualise=True)
+    # score_thresholded, mse_thresholded = train_random_forests("Baseline", process="thresholded", visualise=True)
+    # score_smoothed, mse_smoothed = train_random_forests("Baseline", process="smoothed", visualise=True)
+    # score_noised, mse_noised = train_random_forests("Baseline", process="noised", visualise=True)
+    spectra, oxy = get_normalised_spectra_oxy("test extraction", process=None, visualise=False)
+    mse = aggregated_model("Baseline", spectra[0:50], target_oxy=oxy[0:50])
+    print(mse)
     print("--- %s seconds ---" % (time.time() - start_time))

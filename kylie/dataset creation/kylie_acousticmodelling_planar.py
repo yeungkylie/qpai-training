@@ -161,19 +161,21 @@ for simulation_idx in range(NUM_SIMULATIONS):
 
     device = sp.PhotoacousticDevice(device_position_mm=np.array([VOLUME_TRANSDUCER_DIM_IN_MM / 2,
                                                                  VOLUME_PLANAR_DIM_IN_MM / 2,
-                                                                 0]))
+                                                                 0]),
+                                    field_of_view_extent_mm=np.asarray([-9.6,9.6,-9.6,9.6,0,19.2]))
     device.add_illumination_geometry(sp.GaussianBeamIlluminationGeometry(beam_radius_mm=20))
     device.set_detection_geometry(sp.PlanarArrayDetectionGeometry(device_position_mm=device.device_position_mm,
-                                                                  pitch_mm=4,
-                                                                  number_detector_elements_x=1,
-                                                                  number_detector_elements_y=1))
+                                                                  pitch_mm=0.3,
+                                                                  number_detector_elements_x=10,
+                                                                  number_detector_elements_y=10,
+                                                                  field_of_view_extent_mm=np.asarray([-9.6,9.6,-9.6,9.6,0,19.2])))
     print(device.get_detection_geometry().get_detector_element_positions_base_mm())
 
     SIMULATION_PIPELINE = [
         sp.ModelBasedVolumeCreationAdapter(settings),
         sp.MCXAdapter(settings),
         sp.KWaveAdapter(settings),
-        sp.TimeReversalAdapter(settings),
+        sp.DelayAndSumAdapter(settings),
         ]
 
     sp.simulate(SIMULATION_PIPELINE, settings, device)

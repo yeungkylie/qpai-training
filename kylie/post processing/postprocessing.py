@@ -103,6 +103,29 @@ def generate_processed_datasets(SET_NAME):
                  distances=old["distances"],
                  pca_components=old["pca_components"])
 
+        # thresholded and smoothed
+        thresholded_smoothed_spectra, new_oxy, new_distances, new_depths \
+                = distance_threshold(smooth_spectra(r_spectra), r_oxygenations, r_distances, r_depths)
+        THRESHOLDED_SMOOTHED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_thresholded_smoothed_spectra.npz"
+        np.savez(THRESHOLDED_SMOOTHED_FILE,
+                 wavelengths=old["wavelengths"],
+                 oxygenations=new_oxy,
+                 spectra=thresholded_smoothed_spectra,
+                 melanin_concentration=old["melanin_concentration"],
+                 background_oxygenation=old["background_oxygenation"],
+                 depths=new_depths,
+                 distances=new_distances,
+                 pca_components=old["pca_components"])
+
 
 if __name__ == "__main__":
-    generate_processed_datasets("test extraction")
+    generate_processed_datasets("0.6mm Res")
+    generate_processed_datasets("1.2mm Res")
+    generate_processed_datasets("5mm Illumination")
+    generate_processed_datasets("BG 0-100")
+    generate_processed_datasets("BG 60-80")
+    generate_processed_datasets("Heterogeneous with vessels")
+    generate_processed_datasets("High Res")
+    generate_processed_datasets("HighRes SmallVess")
+    generate_processed_datasets("Point Illumination")
+    generate_processed_datasets("Skin")

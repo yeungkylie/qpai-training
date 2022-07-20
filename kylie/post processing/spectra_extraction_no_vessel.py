@@ -279,6 +279,6 @@ def extract_spectra(SET_NAME):
     visualise_PCA(r_pca_components, r_oxygenations)
 
 if __name__ == "__main__":
-    extract_spectra("Heterogeneous 60-80")
+    # extract_spectra("Heterogeneous 60-80")
     extract_spectra("Heterogeneous 0-100")
 

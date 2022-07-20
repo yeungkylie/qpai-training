@@ -14,8 +14,8 @@ VOLUME_HEIGHT_IN_MM = 19.2
 SPACING = 0.3
 NUM_VERTICAL_COMPARTMENTS = 3
 NUM_HORIZONTAL_COMPARTMENTS = 2
-# WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
-WAVELENGTHS = [800]  # one wavelength for testing
+WAVELENGTHS = np.linspace(700, 900, 41, dtype=int)  # full 41 wavelengths
+# WAVELENGTHS = [800]  # one wavelength for testing
 NUM_SIMULATIONS = 1
 
 path_manager = sp.PathManager()
@@ -141,7 +141,7 @@ for simulation_idx in range(NUM_SIMULATIONS):
         Tags.TUKEY_WINDOW_ALPHA: 0.5,
         Tags.BANDPASS_CUTOFF_LOWPASS: int(8e6),
         Tags.BANDPASS_CUTOFF_HIGHPASS: int(0.1e4),
-        Tags.RECONSTRUCTION_BMODE_AFTER_RECONSTRUCTION: False,
+        Tags.RECONSTRUCTION_BMODE_AFTER_RECONSTRUCTION: True,
         Tags.RECONSTRUCTION_BMODE_METHOD: Tags.RECONSTRUCTION_BMODE_METHOD_HILBERT_TRANSFORM,
         Tags.RECONSTRUCTION_APODIZATION_METHOD: Tags.RECONSTRUCTION_APODIZATION_BOX,
         Tags.RECONSTRUCTION_MODE: Tags.RECONSTRUCTION_MODE_PRESSURE,
@@ -161,18 +161,21 @@ for simulation_idx in range(NUM_SIMULATIONS):
 
     device = sp.PhotoacousticDevice(device_position_mm=np.array([VOLUME_TRANSDUCER_DIM_IN_MM / 2,
                                                                  VOLUME_PLANAR_DIM_IN_MM / 2,
-                                                                 0]))
+                                                                 0]),
+                                    field_of_view_extent_mm=np.asarray([-9.6,9.6,0,0,0,19.2]))
     device.add_illumination_geometry(sp.GaussianBeamIlluminationGeometry(beam_radius_mm=20))
     device.set_detection_geometry(sp.LinearArrayDetectionGeometry(device_position_mm=device.device_position_mm,
-                                                                  pitch_mm=0.5,
-                                                                  number_detector_elements=20))
+                                                                  pitch_mm=0.18,
+                                                                  number_detector_elements=100,
+                                                                  field_of_view_extent_mm=np.asarray([-9.6,9.6,0,0,0,19.2])))
     print(device.get_detection_geometry().get_detector_element_positions_base_mm())
 
     SIMULATION_PIPELINE = [
         sp.ModelBasedVolumeCreationAdapter(settings),
         sp.MCXAdapter(settings),
         sp.KWaveAdapter(settings),
-        sp.TimeReversalAdapter(settings),
+        sp.DelayAndSumAdapter(settings),
+        sp.FieldOfViewCropping(settings)
         ]
 
     sp.simulate(SIMULATION_PIPELINE, settings, device)
