@@ -1,15 +1,14 @@
 from sklearn.ensemble import RandomForestRegressor
 from kylie import prepare_simpa_simulations as p
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import median_absolute_error
 import numpy as np
 import os
 from sklearn.model_selection import KFold
 import pickle
 import time
-from kylie import spectra_extraction_no_vessel as s
 start_time = time.time()
 
-def get_normalised_spectra_oxy(SET_NAME, process, visualise):
+def get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise):
     if process is None:
         IN_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     else:
@@ -19,6 +18,17 @@ def get_normalised_spectra_oxy(SET_NAME, process, visualise):
     r_melanin_concentration, r_background_oxygenation, \
     r_distances, r_depths, r_pca_components = p.load_spectra_file(IN_FILE)
 
+    print(f"Original spectra and oxy shapes: {r_spectra.shape}, {r_oxygenations.shape}.")
+
+    # subsample to standardize num spectra in all datasets
+    np.random.seed(1)  # use random seed for reproducibility
+    num_samples = n_spectra
+    random_selection = np.random.choice(np.size(r_spectra, axis=1), num_samples, replace=False)
+    print(f"The following subset of spectra were selected: {random_selection}")
+    r_oxygenations = r_oxygenations[random_selection]
+    r_spectra = r_spectra[:, random_selection]
+    print(f"New spectra and oxy shapes: {r_spectra.shape}, {r_oxygenations.shape}.")
+
     # normalise and transpose to fit random forest dimensions
     print(f"Normalising spectra ...")
     spectra = (np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)).T
@@ -26,14 +36,15 @@ def get_normalised_spectra_oxy(SET_NAME, process, visualise):
     if visualise:
         print(f"Visualise training spectra...")
         p.visualise_spectra(spectra.T, oxy, r_melanin_concentration,
-                          r_distances, r_depths, num_sO2_brackets=4, num_samples=300, normalise=False)
+                          r_distances[random_selection], r_depths[random_selection], num_sO2_brackets=4, num_samples=300, normalise=False)
     return spectra, oxy
 
-def train_random_forests(SET_NAME, process=None, visualise=False):
+def train_random_forests(SET_NAME, n_spectra, process=None, visualise=False):
     """ process = 'thresholded', 'noised','smoothed' """
-    spectra, oxy = get_normalised_spectra_oxy(SET_NAME, process, visualise)
+    print(f"Training {SET_NAME}:")
+    spectra, oxy = get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise)
     scores = []
-    mse = []
+    mae = []
     kf = KFold(n_splits=5, shuffle=False)
     for idx, (train_index, test_index) in enumerate(kf.split(spectra)):
         print("Train Index: ", train_index, "\n")
@@ -43,22 +54,23 @@ def train_random_forests(SET_NAME, process=None, visualise=False):
         rfr.fit(xtrain, ytrain)
 
         scores.append(rfr.score(xtrain, ytrain))
-        print(scores)  # shows how closely the target oxy can be regressed to spectra
+        print(f"Fold {idx} scores: ", scores)  # shows how closely the target oxy can be regressed to spectra
 
         ypred = rfr.predict(xtest)
-        mse.append(mean_squared_error(ytest, ypred))
-        print("MSE: ", mse)
+        mae.append(median_absolute_error(ytest, ypred))
+        print(f"Fold {idx} median absolute error: ", mae)
 
-        OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models/"
+        OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
+        if not os.path.exists(OUT_FOLDER):
+            os.makedirs(OUT_FOLDER)
         OUT_FILE = f"{SET_NAME}_{process}_rf{idx}.sav"
         pickle.dump(rfr, open(os.path.join(OUT_FOLDER, OUT_FILE), 'wb'))  # save each fold
     mean_score = np.mean(scores)
-    mean_mse = np.mean(mse)
+    mean_mae = np.mean(mae)
     np.savez(os.path.join(OUT_FOLDER, f"{SET_NAME}_{process}_metrics.npz"),
-             scores=scores, mse=mse, mean_score=mean_score, mean_MSE=mean_mse)
-    print(f"Averaged score: {np.mean(scores)}")  # metric combining r-score of all folds
-    print(f"Averaged MSE: {np.mean(mse)}")  # metric combining mse of all folds
-    return mean_score, mean_mse
+             scores=scores, mae=mae, mean_score=mean_score, mean_mae=mean_mae)
+    print(f"5-fold averaged score: {np.mean(scores)}")  # metric combining r-score of all folds
+    print(f"5-fold averaged median absolute error: {np.mean(mae)}")  # metric combining mae of all folds
 
 
 def aggregated_model(SET_NAME, input_spectra, process=None, target_oxy=None):
@@ -74,17 +86,54 @@ def aggregated_model(SET_NAME, input_spectra, process=None, target_oxy=None):
     final_prediction = np.mean(ypred, axis=0)
     print(f"final prediction: {final_prediction}")
     if target_oxy is not None:
-        mse = mean_squared_error(target_oxy, final_prediction)
-        print(f"MSE {mse}")
-    return mse
+        mae = median_absolute_error(target_oxy, final_prediction)
+        print(f"Median absolute error {mae}")
+    return mae
+
+
+def train_all(SET_NAME, n_spectra):
+    train_random_forests(SET_NAME, n_spectra, visualise=True)
+    train_random_forests(SET_NAME, n_spectra, process="thresholded", visualise=True)
+    train_random_forests(SET_NAME, n_spectra, process="smoothed", visualise=True)
+    train_random_forests(SET_NAME, n_spectra, process="noised", visualise=True)
+    train_random_forests(SET_NAME, n_spectra, process="thresholded_smoothed", visualise=True)
+
+def load_metrics(SET_NAME, n_spectra, process=None):
+    OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
+    metrics = np.load(os.path.join(OUT_FOLDER, f"{SET_NAME}_{process}_metrics.npz"))
+    score = metrics["mean_score"]
+    mae = metrics["mean_mae"]
+    return score, mae
+
+def load_all_metrics(SET_NAME, n_spectra):
+    print(f"{SET_NAME} ({n_spectra} spectra-trained model) metrics:")
+    score, mae = load_metrics(SET_NAME, n_spectra)
+    score_thresholded, mae_thresholded = load_metrics(SET_NAME, n_spectra, process="thresholded")
+    score_smoothed, mae_smoothed = load_metrics(SET_NAME, n_spectra, process="smoothed")
+    score_noised, mae_noised = load_metrics(SET_NAME, n_spectra, process="noised")
+    score_thresholded_smoothed, mae_thresholded_smoothed = load_metrics(SET_NAME, n_spectra,
+                                                                                process="thresholded_smoothed")
+
+    print(f"No processing: score = {score}, mae = {mae}")
+    print(f"Thresholded: score = {score_thresholded}, mae = {mae_thresholded}")
+    print(f"Smoothed: score = {score_smoothed}, mae = {mae_smoothed}")
+    print(f"Noised: score = {score_noised}, mae = {mae_noised}")
+    print(f"Thresholded and smoothed: score = {score_thresholded_smoothed}, mae = {mae_thresholded_smoothed}")
 
 
 if __name__ == "__main__":
-    # score, mse = train_random_forests("Baseline", visualise=True)
-    # score_thresholded, mse_thresholded = train_random_forests("Baseline", process="thresholded", visualise=True)
-    # score_smoothed, mse_smoothed = train_random_forests("Baseline", process="smoothed", visualise=True)
-    # score_noised, mse_noised = train_random_forests("Baseline", process="noised", visualise=True)
-    spectra, oxy = get_normalised_spectra_oxy("test extraction", process=None, visualise=False)
-    mse = aggregated_model("Baseline", spectra[0:50], target_oxy=oxy[0:50])
-    print(mse)
+    n_spectra = 400000
+    # datasets = ["Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
+    datasets = ["Baseline", "0.6mm Res", "5mm Illumination",
+                "Point Illumination", "BG 0-100", "BG 60-80",
+                "Heterogeneous with vessels", "High Res",
+                "HighRes SmallVess", "Point Illumination", "Skin"]
+
+    for dataset in datasets:
+        train_all(dataset, n_spectra=n_spectra)
+
+    for dataset in datasets:
+        load_all_metrics(dataset, n_spectra)
+
+
     print("--- %s seconds ---" % (time.time() - start_time))

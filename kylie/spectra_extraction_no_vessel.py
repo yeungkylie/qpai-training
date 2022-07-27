@@ -1,5 +1,7 @@
 import os
 import glob
+
+import h5py
 import simpa as sp
 import numpy as np
 import matplotlib as mpl
@@ -28,7 +30,9 @@ def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int =
         settings = sp.load_data_field(file, sp.Tags.SETTINGS)
         wavelengths = settings[sp.Tags.WAVELENGTHS]
 
-        segmentation_classes = sp.load_data_field(file, sp.Tags.DATA_FIELD_SEGMENTATION)
+        # segmentation_classes = sp.load_data_field(file, sp.Tags.DATA_FIELD_SEGMENTATION)
+        data = h5py.File(file)
+        segmentation_classes = data['new_segmentation']
         if target_tissue_class == 3:
             distances = distance_transform_edt(segmentation_classes == target_tissue_class)
         else:
@@ -155,6 +159,7 @@ def combine_spectra_files(folder_or_filename, target_file):
     pca = PCA(n_components=2)
     pca.fit(n_spectra.T)
     pca_components = pca.transform(n_spectra.T)
+    # pca_components = 0
 
     folders = os.path.dirname(target_file)
     if not os.path.exists(folders):
@@ -266,7 +271,7 @@ def visualise_PCA(pca_components, colorcode):
 
 def extract_spectra(SET_NAME):
     print(f"--- extracting data from {SET_NAME} ---")
-    IN_PATH = f"I:/research/seblab/data/group_folders/Kylie/{SET_NAME}/"
+    IN_PATH = f"I:/research/seblab/data/group_folders/Kylie/all simulated data/{SET_NAME}/"
     OUT_FILE = f"I:/research/seblab/data/group_folders/Kylie/{SET_NAME}/{SET_NAME}_spectra.npz"
     # no target tissue class for vessel-less extraction
     read_hdf5_and_extract_spectra(IN_PATH)

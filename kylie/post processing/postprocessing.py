@@ -12,6 +12,8 @@ def distance_threshold(spectra, oxy, distances, depths, spacing=0.3):
         print(distances)
         if spacing == 0.3:
                 threshold_pixel = 2  # threshold of 2 pixels is equivalent to 0.6mm
+        elif spacing == 0.15:
+                threshold_pixel = 4  # threshold of 4 pixels is eqiuivalent to 0.6mm
         else:
                 threshold_pixel = 1  # extract all outermost pixels
         oxy = oxy[distances <= threshold_pixel]
@@ -56,7 +58,7 @@ def visualise_processed_spectra(spectra, mode):
                          color='r', linewidth=2, alpha=0.1)
                 plt.show()
 
-def generate_processed_datasets(SET_NAME):
+def generate_processed_datasets(SET_NAME, spacing = 0.3):
         IN_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
         r_wavelengths, r_oxygenations, r_spectra, \
         r_melanin_concentration, r_background_oxygenation, \
@@ -65,7 +67,7 @@ def generate_processed_datasets(SET_NAME):
 
         ## extract distances
         thresholded_spectra, new_oxy, new_distances, new_depths \
-                = distance_threshold(r_spectra, r_oxygenations, r_distances, r_depths)
+                = distance_threshold(r_spectra, r_oxygenations, r_distances, r_depths, spacing=spacing)
         THRESHOLDED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_thresholded_spectra.npz"
         np.savez(THRESHOLDED_FILE,
                  wavelengths=old["wavelengths"],
@@ -77,35 +79,35 @@ def generate_processed_datasets(SET_NAME):
                  distances=new_distances,
                  pca_components=old["pca_components"])
 
-        ## noised
-        noised_spectra = noise_initial_pressure(r_spectra)
-        NOISED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_noised_spectra.npz"
-        np.savez(NOISED_FILE,
-                 wavelengths=old["wavelengths"],
-                 oxygenations=old["oxygenations"],
-                 spectra=noised_spectra,
-                 melanin_concentration=old["melanin_concentration"],
-                 background_oxygenation=old["background_oxygenation"],
-                 depths=old["depths"],
-                 distances=old["distances"],
-                 pca_components=old["pca_components"])
+        # ## noised
+        # noised_spectra = noise_initial_pressure(r_spectra)
+        # NOISED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_noised_spectra.npz"
+        # np.savez(NOISED_FILE,
+        #          wavelengths=old["wavelengths"],
+        #          oxygenations=old["oxygenations"],
+        #          spectra=noised_spectra,
+        #          melanin_concentration=old["melanin_concentration"],
+        #          background_oxygenation=old["background_oxygenation"],
+        #          depths=old["depths"],
+        #          distances=old["distances"],
+        #          pca_components=old["pca_components"])
 
         ## smoothed
-        smoothed_spectra = smooth_spectra(r_spectra)
-        SMOOTHED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_smoothed_spectra.npz"
-        np.savez(SMOOTHED_FILE,
-                 wavelengths=old["wavelengths"],
-                 oxygenations=old["oxygenations"],
-                 spectra=smoothed_spectra,
-                 melanin_concentration=old["melanin_concentration"],
-                 background_oxygenation=old["background_oxygenation"],
-                 depths=old["depths"],
-                 distances=old["distances"],
-                 pca_components=old["pca_components"])
+        # smoothed_spectra = smooth_spectra(r_spectra)
+        # SMOOTHED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_smoothed_spectra.npz"
+        # np.savez(SMOOTHED_FILE,
+        #          wavelengths=old["wavelengths"],
+        #          oxygenations=old["oxygenations"],
+        #          spectra=smoothed_spectra,
+        #          melanin_concentration=old["melanin_concentration"],
+        #          background_oxygenation=old["background_oxygenation"],
+        #          depths=old["depths"],
+        #          distances=old["distances"],
+        #          pca_components=old["pca_components"])
 
         # thresholded and smoothed
         thresholded_smoothed_spectra, new_oxy, new_distances, new_depths \
-                = distance_threshold(smooth_spectra(r_spectra), r_oxygenations, r_distances, r_depths)
+                = distance_threshold(smooth_spectra(r_spectra), r_oxygenations, r_distances, r_depths, spacing=spacing)
         THRESHOLDED_SMOOTHED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_thresholded_smoothed_spectra.npz"
         np.savez(THRESHOLDED_SMOOTHED_FILE,
                  wavelengths=old["wavelengths"],
@@ -119,13 +121,13 @@ def generate_processed_datasets(SET_NAME):
 
 
 if __name__ == "__main__":
-    generate_processed_datasets("0.6mm Res")
-    generate_processed_datasets("1.2mm Res")
-    generate_processed_datasets("5mm Illumination")
-    generate_processed_datasets("BG 0-100")
-    generate_processed_datasets("BG 60-80")
-    generate_processed_datasets("Heterogeneous with vessels")
-    generate_processed_datasets("High Res")
-    generate_processed_datasets("HighRes SmallVess")
-    generate_processed_datasets("Point Illumination")
-    generate_processed_datasets("Skin")
+    generate_processed_datasets("0.6mm Res", spacing=0.6)
+    generate_processed_datasets("1.2mm Res", spacing=1.2)
+    # generate_processed_datasets("5mm Illumination")
+    # generate_processed_datasets("BG 0-100")
+    # generate_processed_datasets("BG 60-80")
+    # generate_processed_datasets("Heterogeneous with vessels")
+    generate_processed_datasets("High Res", spacing=0.15)
+    generate_processed_datasets("HighRes SmallVess", spacing=0.15)
+    # generate_processed_datasets("Point Illumination")
+    # generate_processed_datasets("Skin")
