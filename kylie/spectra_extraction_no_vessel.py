@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from scipy.ndimage import distance_transform_edt
-import time
+from kylie.training import train_random_forest as trf
 from sklearn.decomposition import PCA
 
 
@@ -21,6 +21,7 @@ def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int =
     if not os.path.exists(tmp_folder):
         os.makedirs(tmp_folder)
 
+    files.sort()  #because for some reason it does not load in the right order
     for file in files:
         filename = os.path.basename(file)
         if os.path.exists(tmp_folder + "/" + filename + ".npz"):
@@ -32,7 +33,7 @@ def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int =
 
         # segmentation_classes = sp.load_data_field(file, sp.Tags.DATA_FIELD_SEGMENTATION)
         data = h5py.File(file)
-        segmentation_classes = data['new_segmentation']
+        segmentation_classes = np.array(data['new_segmentation'])
         if target_tissue_class == 3:
             distances = distance_transform_edt(segmentation_classes == target_tissue_class)
         else:
@@ -285,5 +286,8 @@ def extract_spectra(SET_NAME):
 
 if __name__ == "__main__":
     extract_spectra("Heterogeneous 60-80")
+    trf.train_all("Heterogeneous 60-80", n_spectra=400000)
+    trf.train_all("Heterogeneous 60-80", n_spectra=77000)
     extract_spectra("Heterogeneous 0-100")
-
+    trf.train_all("Heterogeneous 0-100", n_spectra=400000)
+    trf.train_all("Heterogeneous 0-100", n_spectra=77000)

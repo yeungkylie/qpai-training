@@ -73,24 +73,6 @@ def train_random_forests(SET_NAME, n_spectra, process=None, visualise=False):
     print(f"5-fold averaged median absolute error: {np.mean(mae)}")  # metric combining mae of all folds
 
 
-def aggregated_model(SET_NAME, input_spectra, process=None, target_oxy=None):
-    rfr = []
-    ypred = []
-    OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models/{SET_NAME}"  # where the models are stored
-    for idx in range(5):  # for each fold
-        rfr_idx = pickle.load(open(os.path.join(OUT_FOLDER, f"{SET_NAME}_{process}_rf{idx}.sav"), 'rb'))
-        rfr.append(rfr_idx)
-        ypred_idx = rfr[idx].predict(input_spectra)
-        ypred.append(ypred_idx)
-        print(f"model{idx} prediction: {ypred[idx]}")
-    final_prediction = np.mean(ypred, axis=0)
-    print(f"final prediction: {final_prediction}")
-    if target_oxy is not None:
-        mae = median_absolute_error(target_oxy, final_prediction)
-        print(f"Median absolute error {mae}")
-    return mae
-
-
 def train_all(SET_NAME, n_spectra):
     train_random_forests(SET_NAME, n_spectra, visualise=True)
     train_random_forests(SET_NAME, n_spectra, process="thresholded", visualise=True)
@@ -122,18 +104,17 @@ def load_all_metrics(SET_NAME, n_spectra):
 
 
 if __name__ == "__main__":
-    n_spectra = 400000
     # datasets = ["Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
-    datasets = ["Baseline", "0.6mm Res", "5mm Illumination",
-                "Point Illumination", "BG 0-100", "BG 60-80",
-                "Heterogeneous with vessels", "High Res",
-                "HighRes SmallVess", "Point Illumination", "Skin"]
+    #             "Point Illumination", "BG 0-100", "BG 60-80",
+    #             "Heterogeneous with vessels", "High Res",
+    #             "HighRes SmallVess", "Point Illumination", "Skin"]
+    datasets = ["Heterogeneous 60-80", "Heterogeneous 0-100"]
+    for dataset in datasets:
+        train_all(dataset, n_spectra=400000)
+        train_all(dataset, n_spectra=77000)
 
     for dataset in datasets:
-        train_all(dataset, n_spectra=n_spectra)
-
-    for dataset in datasets:
-        load_all_metrics(dataset, n_spectra)
-
+        load_all_metrics(dataset, 400000)
+        load_metrics(dataset, 77000)
 
     print("--- %s seconds ---" % (time.time() - start_time))
