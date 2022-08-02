@@ -8,7 +8,7 @@ import pickle
 import time
 start_time = time.time()
 
-def get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise):
+def get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise, flowphantom):
     if process is None:
         IN_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     else:
@@ -18,6 +18,10 @@ def get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise):
     r_melanin_concentration, r_background_oxygenation, \
     r_distances, r_depths, r_pca_components = p.load_spectra_file(IN_FILE)
 
+    if flowphantom:
+        flowphantom_wavelengths = np.asarray([700, 720, 740, 760, 780, 800, 820, 840, 860, 880, 900])
+        wavelength_idx = (flowphantom_wavelengths - 700) / 5
+        r_spectra = r_spectra[wavelength_idx.astype(int), :]
     print(f"Original spectra and oxy shapes: {r_spectra.shape}, {r_oxygenations.shape}.")
 
     # subsample to standardize num spectra in all datasets
@@ -32,17 +36,19 @@ def get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise):
     # normalise and transpose to fit random forest dimensions
     print(f"Normalising spectra ...")
     spectra = (np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)).T
+    print(f"spectra: {spectra}")
     oxy = r_oxygenations
+    print(f"oxy: {oxy}")
     if visualise:
         print(f"Visualise training spectra...")
         p.visualise_spectra(spectra.T, oxy, r_melanin_concentration,
-                          r_distances[random_selection], r_depths[random_selection], num_sO2_brackets=4, num_samples=300, normalise=False)
+                          r_distances[random_selection], r_depths[random_selection], num_sO2_brackets=1, num_samples=300, normalise=False)
     return spectra, oxy
 
-def train_random_forests(SET_NAME, n_spectra, process=None, visualise=False):
+def train_random_forests(SET_NAME, n_spectra, flowphantom, process=None, visualise=False):
     """ process = 'thresholded', 'noised','smoothed' """
     print(f"Training {SET_NAME}:")
-    spectra, oxy = get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise)
+    spectra, oxy = get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise, flowphantom)
     scores = []
     mae = []
     kf = KFold(n_splits=5, shuffle=False)
@@ -60,7 +66,10 @@ def train_random_forests(SET_NAME, n_spectra, process=None, visualise=False):
         mae.append(median_absolute_error(ytest, ypred))
         print(f"Fold {idx} median absolute error: ", mae)
 
-        OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
+        if not flowphantom:
+            OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
+        else:
+            OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra} flowphantom/{SET_NAME}/{process}"
         if not os.path.exists(OUT_FOLDER):
             os.makedirs(OUT_FOLDER)
         OUT_FILE = f"{SET_NAME}_{process}_rf{idx}.sav"
@@ -73,12 +82,20 @@ def train_random_forests(SET_NAME, n_spectra, process=None, visualise=False):
     print(f"5-fold averaged median absolute error: {np.mean(mae)}")  # metric combining mae of all folds
 
 
-def train_all(SET_NAME, n_spectra):
-    train_random_forests(SET_NAME, n_spectra, visualise=True)
-    train_random_forests(SET_NAME, n_spectra, process="thresholded", visualise=True)
-    train_random_forests(SET_NAME, n_spectra, process="smoothed", visualise=True)
-    train_random_forests(SET_NAME, n_spectra, process="noised", visualise=True)
-    train_random_forests(SET_NAME, n_spectra, process="thresholded_smoothed", visualise=True)
+def train_all(SET_NAME, n_spectra, flowphantom=False):
+    train_random_forests(SET_NAME, n_spectra, flowphantom=flowphantom)
+    try:
+        train_random_forests(SET_NAME, n_spectra, flowphantom, process="thresholded")
+    except FileNotFoundError:
+        print("Thresholded spectra does not exist")
+        pass
+    train_random_forests(SET_NAME, n_spectra, flowphantom, process="smoothed")
+    train_random_forests(SET_NAME, n_spectra, flowphantom, process="noised")
+    try:
+        train_random_forests(SET_NAME, n_spectra, flowphantom, process="thresholded_smoothed")
+    except FileNotFoundError:
+        print("Thresholded spectra does not exist")
+        pass
 
 def load_metrics(SET_NAME, n_spectra, process=None):
     OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
@@ -90,31 +107,28 @@ def load_metrics(SET_NAME, n_spectra, process=None):
 def load_all_metrics(SET_NAME, n_spectra):
     print(f"{SET_NAME} ({n_spectra} spectra-trained model) metrics:")
     score, mae = load_metrics(SET_NAME, n_spectra)
-    score_thresholded, mae_thresholded = load_metrics(SET_NAME, n_spectra, process="thresholded")
+    # score_thresholded, mae_thresholded = load_metrics(SET_NAME, n_spectra, process="thresholded")
     score_smoothed, mae_smoothed = load_metrics(SET_NAME, n_spectra, process="smoothed")
     score_noised, mae_noised = load_metrics(SET_NAME, n_spectra, process="noised")
-    score_thresholded_smoothed, mae_thresholded_smoothed = load_metrics(SET_NAME, n_spectra,
-                                                                                process="thresholded_smoothed")
+    # score_thresholded_smoothed, mae_thresholded_smoothed = load_metrics(SET_NAME, n_spectra,
+    #                                                                             process="thresholded_smoothed")
 
     print(f"No processing: score = {score}, mae = {mae}")
-    print(f"Thresholded: score = {score_thresholded}, mae = {mae_thresholded}")
+    # print(f"Thresholded: score = {score_thresholded}, mae = {mae_thresholded}")
     print(f"Smoothed: score = {score_smoothed}, mae = {mae_smoothed}")
     print(f"Noised: score = {score_noised}, mae = {mae_noised}")
-    print(f"Thresholded and smoothed: score = {score_thresholded_smoothed}, mae = {mae_thresholded_smoothed}")
+    # print(f"Thresholded and smoothed: score = {score_thresholded_smoothed}, mae = {mae_thresholded_smoothed}")
 
 
 if __name__ == "__main__":
-    # datasets = ["Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
-    #             "Point Illumination", "BG 0-100", "BG 60-80",
-    #             "Heterogeneous with vessels", "High Res",
-    #             "HighRes SmallVess", "Point Illumination", "Skin"]
-    datasets = ["Heterogeneous 60-80", "Heterogeneous 0-100"]
+    datasets = ["Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
+                "Point Illumination", "BG 0-100", "BG 60-80",
+                "Heterogeneous with vessels", "Heterogeneous 60-80",
+                "Heterogeneous 0-100", "High Res",
+                "HighRes SmallVess", "Point Illumination", "Skin", "Acoustic"]
     for dataset in datasets:
-        train_all(dataset, n_spectra=400000)
-        train_all(dataset, n_spectra=77000)
-
-    for dataset in datasets:
-        load_all_metrics(dataset, 400000)
-        load_metrics(dataset, 77000)
+        train_all(dataset, n_spectra=50000, flowphantom=True)
+        train_all(dataset, n_spectra=50000)
+        # train_all(dataset, n_spectra=77000)
 
     print("--- %s seconds ---" % (time.time() - start_time))

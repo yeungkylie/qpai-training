@@ -22,7 +22,7 @@ random = np.load('I:/research\seblab\data\group_folders\Kylie/all simulated data
 selection = random['selection']
 print(selection)
 
-for image in range(500):
+for image in range(3,4):
     print(f'Creating new segmentation for image {image}')
     folder = 'I:/research\seblab\data\group_folders\Kylie/all simulated data\Heterogeneous 0-100/'
     file = "KylieHeterogeneousNoVess2_" + str(int(1e4+image)) + '.hdf5'

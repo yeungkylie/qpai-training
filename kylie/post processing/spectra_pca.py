@@ -18,8 +18,9 @@ datasets = [
             # "0.6mm Res", "1.2mm Res", "5mm Illumination",
             # "BG 0-100", "BG 60-80", "Point Illumination", "BG 0-100", "BG 60-80",
             # "Heterogeneous with vessels", "Heterogeneous 60-80", "Heterogeneous 0-100",
-            "High Res",
-            "HighRes SmallVess", "Point Illumination", "Skin"]
+            # "High Res",
+            # "HighRes SmallVess", "Point Illumination", "Skin"
+            "Acoustic"]
 
 for SET_NAME in datasets:
     # first plot the baseline pca in grayscale

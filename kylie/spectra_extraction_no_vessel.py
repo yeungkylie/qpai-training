@@ -1,6 +1,5 @@
 import os
 import glob
-
 import h5py
 import simpa as sp
 import numpy as np
@@ -8,6 +7,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from scipy.ndimage import distance_transform_edt
 from kylie.training import train_random_forest as trf
+from kylie import postprocessing as pp
 from sklearn.decomposition import PCA
 
 
@@ -109,7 +109,9 @@ def combine_spectra_files(folder_or_filename, target_file):
     depths = None
     distances = None
 
+    npz_files.sort()  #because for some reason it does not load in the right order
     for npz_file in npz_files:
+        print(npz_file)
         data = np.load(npz_file)
         _oxygen = data["oxygenation_values"]
         _spectra = data["spectra"]
@@ -273,21 +275,21 @@ def visualise_PCA(pca_components, colorcode):
 def extract_spectra(SET_NAME):
     print(f"--- extracting data from {SET_NAME} ---")
     IN_PATH = f"I:/research/seblab/data/group_folders/Kylie/all simulated data/{SET_NAME}/"
-    OUT_FILE = f"I:/research/seblab/data/group_folders/Kylie/{SET_NAME}/{SET_NAME}_spectra.npz"
+    OUT_FILE = f"I:/research/seblab/data/group_folders/Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     # no target tissue class for vessel-less extraction
     read_hdf5_and_extract_spectra(IN_PATH)
     combine_spectra_files(IN_PATH, OUT_FILE)
+
+    ## visualise
     r_wavelengths, r_oxygenations, r_spectra, \
         r_melanin_concentration, r_background_oxygenation,\
         r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
     visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
-                      r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
+                      r_distances, r_depths, num_sO2_brackets=1, num_samples=300)
     visualise_PCA(r_pca_components, r_oxygenations)
 
 if __name__ == "__main__":
     extract_spectra("Heterogeneous 60-80")
+    pp.generate_processed_datasets("Heterogeneous 60-80")
     trf.train_all("Heterogeneous 60-80", n_spectra=400000)
     trf.train_all("Heterogeneous 60-80", n_spectra=77000)
-    extract_spectra("Heterogeneous 0-100")
-    trf.train_all("Heterogeneous 0-100", n_spectra=400000)
-    trf.train_all("Heterogeneous 0-100", n_spectra=77000)

@@ -14,7 +14,7 @@ def normalise_sum_to_one(a):
     return a / np.linalg.norm(a)
 
 
-def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int = 3):
+def read_hdf5_and_extract_spectra(folder_or_filename, acoustic, target_tissue_class: int = 3):
     files, tmp_folder = get_files_and_tmp_folder(folder_or_filename)
     print(tmp_folder)
     if not os.path.exists(tmp_folder):
@@ -35,17 +35,28 @@ def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int =
         else:
             distances = np.ones_like(segmentation_classes)
 
-        depths = np.ones_like(distances)
-        for z_layer in range(np.shape(depths)[2]):
-            depths[:, :, z_layer] = z_layer
-        depths = depths / np.max(depths)
+        if not acoustic:
+            depths = np.ones_like(distances)
+            for z_layer in range(np.shape(depths)[2]):
+                depths[:, :, z_layer] = z_layer
+            depths = depths / np.max(depths)
+
+            initial_pressure = []
+            for wavelength in wavelengths:
+                initial_pressure.append(sp.load_data_field(file, sp.Tags.DATA_FIELD_INITIAL_PRESSURE, wavelength))
+            initial_pressure = np.asarray(initial_pressure)
+        else:
+            depths = np.ones_like(distances)
+            for z_layer in range(np.shape(depths)[1]):
+                depths[:, z_layer] = z_layer
+            depths = depths / np.max(depths)
+
+            reconstructed_data = []
+            for wavelength in wavelengths:
+                reconstructed_data.append(sp.load_data_field(file, sp.Tags.DATA_FIELD_RECONSTRUCTED_DATA, wavelength))
+            reconstructed_data = np.asarray(reconstructed_data)
 
         oxygenation = sp.load_data_field(file, sp.Tags.DATA_FIELD_OXYGENATION)
-
-        initial_pressure = []
-        for wavelength in wavelengths:
-            initial_pressure.append(sp.load_data_field(file, sp.Tags.DATA_FIELD_INITIAL_PRESSURE, wavelength))
-        initial_pressure = np.asarray(initial_pressure)
 
         # plt.figure()
         # plt.subplot(1, 4, 1)
@@ -61,7 +72,10 @@ def read_hdf5_and_extract_spectra(folder_or_filename, target_tissue_class: int =
         oxygenation_values = oxygenation[segmentation_classes == target_tissue_class]
         distances = distances[segmentation_classes == target_tissue_class]
         depths = depths[segmentation_classes == target_tissue_class]
-        spectra = initial_pressure[:, segmentation_classes == target_tissue_class]
+        if not acoustic:
+            spectra = initial_pressure[:, segmentation_classes == target_tissue_class]
+        else:
+            spectra = reconstructed_data[:, segmentation_classes == target_tissue_class]
 
         np.savez(tmp_folder + "/" + filename + ".npz",
                  wavelengths=wavelengths,
@@ -105,6 +119,7 @@ def combine_spectra_files(folder_or_filename, target_file):
     depths = None
     distances = None
 
+    npz_files.sort()
     for npz_file in npz_files:
         data = np.load(npz_file)
         _oxygen = data["oxygenation_values"]
@@ -265,11 +280,11 @@ def visualise_PCA(pca_components, colorcode):
     plt.colorbar(sc)
     plt.show()
 
-def extract_spectra(SET_NAME):
+def extract_spectra(SET_NAME, acoustic=False):
     print(f"--- extracting data from {SET_NAME} ---")
-    IN_PATH = f"I:/research\seblab\data\group_folders\Kylie/{SET_NAME}/"
-    OUT_FILE = f"D:/Kylie Simulations/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
-    read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3)
+    IN_PATH = f"I:/research\seblab\data\group_folders\Kylie/all simulated data/{SET_NAME}/"
+    OUT_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}_spectra.npz"
+    read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3, acoustic=acoustic)
     combine_spectra_files(IN_PATH, OUT_FILE)
     r_wavelengths, r_oxygenations, r_spectra, \
         r_melanin_concentration, r_background_oxygenation,\
@@ -279,5 +294,5 @@ def extract_spectra(SET_NAME):
     visualise_PCA(r_pca_components, r_oxygenations)
 
 if __name__ == "__main__":
-
+    extract_spectra("Acoustic", acoustic=True)
     print("--- %s seconds ---" % (time.time() - start_time))
