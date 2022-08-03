@@ -1,5 +1,5 @@
 from sklearn.ensemble import RandomForestRegressor
-from kylie import prepare_simpa_simulations as p
+from kylie.post_processing import prepare_simpa_simulations as p
 from sklearn.metrics import median_absolute_error
 import numpy as np
 import os

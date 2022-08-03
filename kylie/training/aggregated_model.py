@@ -2,7 +2,8 @@ import pickle
 import os
 import numpy as np
 from sklearn.metrics import median_absolute_error
-from kylie import prepare_simpa_simulations as p
+from kylie.post_processing import prepare_simpa_simulations as p
+
 
 def aggregated_model(SET_NAME, process, n_training_spectra, validation_spectra, gt_oxy):
     rfr = []
