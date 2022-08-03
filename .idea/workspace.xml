@@ -1,42 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="updated train random forest script. training script for flow phantom wavelengths">
+    <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/kylie/visualisation/info_sheet.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kylie/visualisation/plot_performance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kylie/visualisation/show_image.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/KylieBaseline_spectra.hdf5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_5mm_illum.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_5mm_illum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_acousticmodelling_linear.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_acousticmodelling_linear.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_baseline_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_baseline_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_bgoxy1_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_bgoxy1_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_bgoxy2_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_bgoxy2_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_heterogeneous2_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_heterogeneous2_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_heterogeneous_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_heterogeneous_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_heterogeneous_vess_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_heterogeneous_vess_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_highres_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_highres_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_highres_smallvess_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_highres_smallvess_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_lowres2_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_lowres2_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_lowres_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_lowres_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_point_illum.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_point_illum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_skin_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/dataset_creation/kylie_skin_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/dataset creation/kylie_vessel_sim.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/archive/kylie_vessel_sim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/parallel_extraction.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/post processing/ImportData.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/ImportData.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/post processing/dataset_spectra.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/archive/dataset_spectra.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/post processing/distance.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/distance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/post processing/spectra_extraction_acoustic.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/spectra_extraction_acoustic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/post processing/spectra_pca.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/spectra_pca.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/post processing/subsample.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/subsample.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/postprocessing.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/postprocessing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/prepare_simpa_simulations.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/prepare_simpa_simulations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/spectra_extraction_no_vessel.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/spectra_extraction_no_vessel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/training/aggregated_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/training/aggregated_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/training/load_trained_models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/post_processing/prepare_simpa_simulations.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/post_processing/prepare_simpa_simulations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/training/aggregated_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/training/validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/training/plot_performance.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/kylie/training/train_random_forest.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/training/train_random_forest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree.svg" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/archive/output_data/Tissue_Generation/Vessel_Tree/vessel_tree.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_0.svg" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/archive/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_0.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_1.svg" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/archive/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_1.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_2.svg" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/archive/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_2.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_6.svg" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/archive/output_data/Tissue_Generation/Vessel_Tree/vessel_tree_6.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,22 +35,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/yeung01/PycharmProjects/qpai-training/kylie/training",
-    "settings.editor.selected.configurable": "preferences.customizations"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yeung01/PycharmProjects/qpai-training/kylie/training&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.customizations&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "JupyterPython"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;JupyterPython&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\training" />
@@ -86,15 +59,15 @@
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\dataset creation" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\visualisation\" />
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\archive" />
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\post_processing" />
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\" />
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kevin" />
-      <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.spectra_extraction_no_vessel">
-    <configuration name="flowphantom_wavelengths" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.validation">
+    <configuration name="check_files" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -107,7 +80,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/flowphantom_wavelengths.py" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/check_files.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -116,7 +89,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="parallel_extraction" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="plot_performance (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -124,12 +97,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie/visualisation" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/parallel_extraction.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/visualisation/plot_performance.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -138,7 +111,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="postprocessing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="show_image (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -146,12 +119,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie/visualisation" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\post_processing\postprocessing.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/visualisation/show_image.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -160,7 +133,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="spectra_extraction_no_vessel" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="show_image" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -168,12 +141,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="$APPLICATION_CONFIG_DIR$/scratches" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\post_processing\spectra_extraction_no_vessel.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\visualisation\show_image.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -182,7 +155,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train_random_forest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -195,7 +168,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/training/train_random_forest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/training/validation.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,11 +179,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.spectra_extraction_no_vessel" />
-        <item itemvalue="Python.train_random_forest" />
-        <item itemvalue="Python.flowphantom_wavelengths" />
-        <item itemvalue="Python.postprocessing" />
-        <item itemvalue="Python.parallel_extraction" />
+        <item itemvalue="Python.validation" />
+        <item itemvalue="Python.check_files" />
+        <item itemvalue="Python.plot_performance (1)" />
+        <item itemvalue="Python.show_image (1)" />
+        <item itemvalue="Python.show_image" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +212,9 @@
       <workItem from="1657717758867" duration="31383000" />
       <workItem from="1657893601775" duration="9216000" />
       <workItem from="1658133892336" duration="29626000" />
-      <workItem from="1658169240988" duration="108040000" />
+      <workItem from="1658169240988" duration="112332000" />
+      <workItem from="1659528130512" duration="235000" />
+      <workItem from="1659528459756" duration="5102000" />
     </task>
     <task id="LOCAL-00001" summary="28 June commit">
       <created>1656427835383</created>
@@ -395,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659454274026</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="refactoring directories">
+      <created>1659521054466</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1659521054466</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,7 +413,8 @@
     <MESSAGE value="revised random forest training scripts and scripts for plotting random forest performance" />
     <MESSAGE value="revised aggregated model file" />
     <MESSAGE value="updated train random forest script. training script for flow phantom wavelengths" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated train random forest script. training script for flow phantom wavelengths" />
+    <MESSAGE value="refactoring directories" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring directories" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -456,12 +439,13 @@
     <SUITE FILE_PATH="coverage/qpai_training$kylie_baseline_sim.coverage" NAME="kylie_baseline_sim Coverage Results" MODIFIED="1657018134426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$train_random_forest__1_.coverage" NAME="train_random_forest (1) Coverage Results" MODIFIED="1658308817380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_acousticmodelling_planar__1_.coverage" NAME="kylie_acousticmodelling_planar (1) Coverage Results" MODIFIED="1657899357427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
+    <SUITE FILE_PATH="coverage/qpai_training$validation.coverage" NAME="validation Coverage Results" MODIFIED="1659533870560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$spectra_extraction.coverage" NAME="spectra_extraction Coverage Results" MODIFIED="1658136745368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />
     <SUITE FILE_PATH="coverage/qpai_training$ImportData__1_.coverage" NAME="ImportData (1) Coverage Results" MODIFIED="1657027609345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_heterogeneous2_sim.coverage" NAME="kylie_heterogeneous2_sim Coverage Results" MODIFIED="1659442187717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
     <SUITE FILE_PATH="coverage/qpai_training$check_files__1_.coverage" NAME="check_files (1) Coverage Results" MODIFIED="1657816404185" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/qpai_training$postprocessing.coverage" NAME="postprocessing Coverage Results" MODIFIED="1659446026310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
-    <SUITE FILE_PATH="coverage/qpai_training$check_files.coverage" NAME="check_files Coverage Results" MODIFIED="1659442150422" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/qpai_training$check_files.coverage" NAME="check_files Coverage Results" MODIFIED="1659532831881" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_skin_sim.coverage" NAME="kylie_skin_sim Coverage Results" MODIFIED="1657624039169" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_heterogeneous_sim.coverage" NAME="kylie_heterogeneous_sim Coverage Results" MODIFIED="1657707815211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_heterogeneous_sim__1_.coverage" NAME="kylie_heterogeneous_sim (1) Coverage Results" MODIFIED="1657720833020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
@@ -473,12 +457,12 @@
     <SUITE FILE_PATH="coverage/qpai_training$spectra_pca.coverage" NAME="spectra_pca Coverage Results" MODIFIED="1659442498375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_bgoxy1_sim.coverage" NAME="kylie_bgoxy1_sim Coverage Results" MODIFIED="1657278595565" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$flowphantom_simulations_inVision.coverage" NAME="flowphantom_simulations_inVision Coverage Results" MODIFIED="1657016431551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kevin" />
-    <SUITE FILE_PATH="coverage/qpai_training$show_image.coverage" NAME="show_image Coverage Results" MODIFIED="1657027816942" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/qpai_training$show_image.coverage" NAME="show_image Coverage Results" MODIFIED="1659531577494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/qpai_training$5fold_crossval.coverage" NAME="5fold_crossval Coverage Results" MODIFIED="1658143060359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$check_hdf5.coverage" NAME="check_hdf5 Coverage Results" MODIFIED="1657805463304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_acousticmodelling.coverage" NAME="kylie_acousticmodelling Coverage Results" MODIFIED="1657897049785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
     <SUITE FILE_PATH="coverage/qpai_training$spectra_extraction_no_vessel__1_.coverage" NAME="spectra_extraction_no_vessel (1) Coverage Results" MODIFIED="1658311340188" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />
-    <SUITE FILE_PATH="coverage/qpai_training$plot_performance.coverage" NAME="plot_performance Coverage Results" MODIFIED="1658927334819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
+    <SUITE FILE_PATH="coverage/qpai_training$plot_performance.coverage" NAME="plot_performance Coverage Results" MODIFIED="1659524059795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$parallel_extraction.coverage" NAME="parallel_extraction Coverage Results" MODIFIED="1659445868145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$distance.coverage" NAME="distance Coverage Results" MODIFIED="1657814003206" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_acousticmodelling_planar.coverage" NAME="kylie_acousticmodelling_planar Coverage Results" MODIFIED="1658327788727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
@@ -490,13 +474,15 @@
     <SUITE FILE_PATH="coverage/qpai_training$kylie_5mm_illum.coverage" NAME="kylie_5mm_illum Coverage Results" MODIFIED="1657121697628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$scratch_1.coverage" NAME="scratch_1 Coverage Results" MODIFIED="1658831197204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/qpai_training$ImportData.coverage" NAME="ImportData Coverage Results" MODIFIED="1657277935852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
-    <SUITE FILE_PATH="coverage/qpai_training$train_random_forest.coverage" NAME="train_random_forest Coverage Results" MODIFIED="1659453439141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
+    <SUITE FILE_PATH="coverage/qpai_training$train_random_forest.coverage" NAME="train_random_forest Coverage Results" MODIFIED="1659523992906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$spectra_extraction2.coverage" NAME="spectra_extraction2 Coverage Results" MODIFIED="1658134150547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />
     <SUITE FILE_PATH="coverage/qpai_training$minimal_optical_simulation.coverage" NAME="minimal_optical_simulation Coverage Results" MODIFIED="1656494947278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_acousticmodelling_linear.coverage" NAME="kylie_acousticmodelling_linear Coverage Results" MODIFIED="1658332038020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_heterogeneous_vess_sim.coverage" NAME="kylie_heterogeneous_vess_sim Coverage Results" MODIFIED="1658164854657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
     <SUITE FILE_PATH="coverage/qpai_training$load_trained_models.coverage" NAME="load_trained_models Coverage Results" MODIFIED="1658147005803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
+    <SUITE FILE_PATH="coverage/qpai_training$show_image__1_.coverage" NAME="show_image (1) Coverage Results" MODIFIED="1659531691268" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/visualisation" />
     <SUITE FILE_PATH="coverage/qpai_training$scratch.coverage" NAME="scratch Coverage Results" MODIFIED="1658311333658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
+    <SUITE FILE_PATH="coverage/qpai_training$plot_performance__1_.coverage" NAME="plot_performance (1) Coverage Results" MODIFIED="1659532168607" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/visualisation" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_highres_smallvess_sim.coverage" NAME="kylie_highres_smallvess_sim Coverage Results" MODIFIED="1657278270296" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$test_rfregression.coverage" NAME="test_rfregression Coverage Results" MODIFIED="1658146488028" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
   </component>

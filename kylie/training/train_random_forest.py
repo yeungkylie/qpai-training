@@ -97,27 +97,31 @@ def train_all(SET_NAME, n_spectra, flowphantom=False):
         print("Thresholded spectra does not exist")
         pass
 
-def load_metrics(SET_NAME, n_spectra, process=None):
-    OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
+def load_metrics(SET_NAME, n_spectra, flowphantom=False, process=None):
+    if not flowphantom:
+        OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
+    else:
+        OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra} flowphantom/{SET_NAME}/{process}"
+    print(f"Retreiving metrics from {OUT_FOLDER}")
     metrics = np.load(os.path.join(OUT_FOLDER, f"{SET_NAME}_{process}_metrics.npz"))
     score = metrics["mean_score"]
     mae = metrics["mean_mae"]
     return score, mae
 
-def load_all_metrics(SET_NAME, n_spectra):
+def load_all_metrics(SET_NAME, n_spectra, flowphantom = False):
     print(f"{SET_NAME} ({n_spectra} spectra-trained model) metrics:")
-    score, mae = load_metrics(SET_NAME, n_spectra)
-    # score_thresholded, mae_thresholded = load_metrics(SET_NAME, n_spectra, process="thresholded")
-    score_smoothed, mae_smoothed = load_metrics(SET_NAME, n_spectra, process="smoothed")
-    score_noised, mae_noised = load_metrics(SET_NAME, n_spectra, process="noised")
-    # score_thresholded_smoothed, mae_thresholded_smoothed = load_metrics(SET_NAME, n_spectra,
-    #                                                                             process="thresholded_smoothed")
+    score, mae = load_metrics(SET_NAME, n_spectra, flowphantom)
+    score_thresholded, mae_thresholded = load_metrics(SET_NAME, n_spectra, flowphantom, process="thresholded")
+    score_smoothed, mae_smoothed = load_metrics(SET_NAME, n_spectra, flowphantom, process="smoothed")
+    score_noised, mae_noised = load_metrics(SET_NAME, n_spectra, flowphantom, process="noised")
+    score_thresholded_smoothed, mae_thresholded_smoothed = load_metrics(SET_NAME, n_spectra, flowphantom,
+                                                                                process="thresholded_smoothed")
 
     print(f"No processing: score = {score}, mae = {mae}")
-    # print(f"Thresholded: score = {score_thresholded}, mae = {mae_thresholded}")
+    print(f"Thresholded: score = {score_thresholded}, mae = {mae_thresholded}")
     print(f"Smoothed: score = {score_smoothed}, mae = {mae_smoothed}")
     print(f"Noised: score = {score_noised}, mae = {mae_noised}")
-    # print(f"Thresholded and smoothed: score = {score_thresholded_smoothed}, mae = {mae_thresholded_smoothed}")
+    print(f"Thresholded and smoothed: score = {score_thresholded_smoothed}, mae = {mae_thresholded_smoothed}")
 
 
 if __name__ == "__main__":
