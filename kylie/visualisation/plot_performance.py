@@ -35,9 +35,9 @@ for process in enumerate(processes):
 
         try:
             score_fp, mae_fp = trf.load_metrics(dataset[1], flowphantom=True, n_spectra=n_spectra2, process=process[1])
-            all_mae_fp[process[0], dataset[0]] = mae
+            all_mae_fp[process[0], dataset[0]] = mae_fp
         except FileNotFoundError:
-            all_mae_fp[process[0], dataset[0]] = 0  # some simulations do not have thresholded datasets, in which case set to 0
+            all_mae_fp[process[0], dataset[0]] = 0
 
     fig, ax = plt.subplots()
     width = 0.25

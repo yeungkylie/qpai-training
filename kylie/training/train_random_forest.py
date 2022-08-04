@@ -97,6 +97,7 @@ def train_all(SET_NAME, n_spectra, flowphantom=False):
         print("Thresholded spectra does not exist")
         pass
 
+
 def load_metrics(SET_NAME, n_spectra, flowphantom=False, process=None):
     if not flowphantom:
         OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie\Trained Models {n_spectra}/{SET_NAME}/{process}"
@@ -107,6 +108,18 @@ def load_metrics(SET_NAME, n_spectra, flowphantom=False, process=None):
     score = metrics["mean_score"]
     mae = metrics["mean_mae"]
     return score, mae
+
+
+def load_test_metrics(SET_NAME, n_training_spectra, test_data, process=None):
+    OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie/validation/{test_data}/{n_training_spectra}"
+    print(f"Retreiving metrics from {OUT_FOLDER}")
+    metrics = np.load(os.path.join(OUT_FOLDER, f"{SET_NAME}_{process}_validation.npz"))
+    ground_truth = metrics["ground_truth"]
+    prediction = metrics["prediction"]
+    ae = metrics["ae"]
+    mae = metrics["mae"]
+    return ground_truth, prediction, ae, mae
+
 
 def load_all_metrics(SET_NAME, n_spectra, flowphantom = False):
     print(f"{SET_NAME} ({n_spectra} spectra-trained model) metrics:")
