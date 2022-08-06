@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf74ecaa-2481-4508-a2c5-c77dffe65b40" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/kylie/visualisation/performance_table.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/training/train_random_forest.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/training/train_random_forest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kylie/training/validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/training/validation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kylie/visualisation/plot_performance.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/visualisation/plot_performance.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/visualisation/performance_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/visualisation/performance_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kylie/visualisation/plot_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/kylie/visualisation/plot_validation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,22 +31,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/yeung01/PycharmProjects/qpai-training/kylie/visualisation",
-    "settings.editor.selected.configurable": "preferences.customizations"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/yeung01/Desktop/mres project&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.customizations&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python",
-      "JupyterPython"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;,
+      &quot;JupyterPython&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kylie\visualisation" />
@@ -64,7 +63,7 @@
       <recent name="C:\Users\yeung01\PycharmProjects\qpai-training\kevin" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.plot_validation">
+  <component name="RunManager" selected="Python.performance_table">
     <configuration name="check_files" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,6 +78,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/check_files.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="performance_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="qpai-training" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie/visualisation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/visualisation/performance_table.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -131,28 +152,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="show_image (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="qpai-training" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kylie/visualisation" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kylie/visualisation/show_image.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="validation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="qpai-training" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -177,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.performance_table" />
         <item itemvalue="Python.plot_validation" />
         <item itemvalue="Python.validation" />
         <item itemvalue="Python.plot_performance (1)" />
         <item itemvalue="Python.check_files" />
-        <item itemvalue="Python.show_image (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +211,7 @@
       <workItem from="1658133892336" duration="29626000" />
       <workItem from="1658169240988" duration="112332000" />
       <workItem from="1659528130512" duration="235000" />
-      <workItem from="1659528459756" duration="17833000" />
+      <workItem from="1659528459756" duration="34214000" />
     </task>
     <task id="LOCAL-00001" summary="28 June commit">
       <created>1656427835383</created>
@@ -382,7 +381,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659534203962</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="syncing unversioned file for plotting validation metrics">
+      <created>1659606965097</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1659606965097</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,7 +426,8 @@
     <MESSAGE value="updated train random forest script. training script for flow phantom wavelengths" />
     <MESSAGE value="refactoring directories" />
     <MESSAGE value="more refactoring and new aggregated model script" />
-    <option name="LAST_COMMIT_MESSAGE" value="more refactoring and new aggregated model script" />
+    <MESSAGE value="syncing unversioned file for plotting validation metrics" />
+    <option name="LAST_COMMIT_MESSAGE" value="syncing unversioned file for plotting validation metrics" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -448,10 +455,11 @@
     <SUITE FILE_PATH="coverage/qpai_training$distance2.coverage" NAME="distance2 Coverage Results" MODIFIED="1657815052056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />
     <SUITE FILE_PATH="coverage/qpai_training$aggregated_model.coverage" NAME="aggregated_model Coverage Results" MODIFIED="1658939031353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_bgoxy2_sim.coverage" NAME="kylie_bgoxy2_sim Coverage Results" MODIFIED="1657278767515" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
+    <SUITE FILE_PATH="coverage/qpai_training$performance_table.coverage" NAME="performance_table Coverage Results" MODIFIED="1659799653521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/visualisation" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_baseline_sim.coverage" NAME="kylie_baseline_sim Coverage Results" MODIFIED="1657018134426" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$train_random_forest__1_.coverage" NAME="train_random_forest (1) Coverage Results" MODIFIED="1658308817380" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_acousticmodelling_planar__1_.coverage" NAME="kylie_acousticmodelling_planar (1) Coverage Results" MODIFIED="1657899357427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
-    <SUITE FILE_PATH="coverage/qpai_training$validation.coverage" NAME="validation Coverage Results" MODIFIED="1659543528691" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
+    <SUITE FILE_PATH="coverage/qpai_training$validation.coverage" NAME="validation Coverage Results" MODIFIED="1659611069476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$spectra_extraction.coverage" NAME="spectra_extraction Coverage Results" MODIFIED="1658136745368" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />
     <SUITE FILE_PATH="coverage/qpai_training$ImportData__1_.coverage" NAME="ImportData (1) Coverage Results" MODIFIED="1657027609345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_heterogeneous2_sim.coverage" NAME="kylie_heterogeneous2_sim Coverage Results" MODIFIED="1659442187717" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/dataset creation" />
@@ -485,7 +493,7 @@
     <SUITE FILE_PATH="coverage/qpai_training$vessel_tree.coverage" NAME="vessel_tree Coverage Results" MODIFIED="1656514330554" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$kylie_5mm_illum.coverage" NAME="kylie_5mm_illum Coverage Results" MODIFIED="1657121697628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$scratch_1.coverage" NAME="scratch_1 Coverage Results" MODIFIED="1658831197204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
-    <SUITE FILE_PATH="coverage/qpai_training$plot_validation.coverage" NAME="plot_validation Coverage Results" MODIFIED="1659606364011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/visualisation" />
+    <SUITE FILE_PATH="coverage/qpai_training$plot_validation.coverage" NAME="plot_validation Coverage Results" MODIFIED="1659799510314" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/visualisation" />
     <SUITE FILE_PATH="coverage/qpai_training$ImportData.coverage" NAME="ImportData Coverage Results" MODIFIED="1657277935852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie" />
     <SUITE FILE_PATH="coverage/qpai_training$train_random_forest.coverage" NAME="train_random_forest Coverage Results" MODIFIED="1659523992906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/training" />
     <SUITE FILE_PATH="coverage/qpai_training$spectra_extraction2.coverage" NAME="spectra_extraction2 Coverage Results" MODIFIED="1658134150547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kylie/post processing" />

@@ -45,17 +45,19 @@ def aggregated_model(SET_NAME, process, n_training_spectra, v_spectra, gt_oxy, f
 
 
 def get_normalized_validation_and_gt(test_data):
-    IN_FILE = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_silico/{test_data}/{test_data}.npz"
+    IN_FILE = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_vitro/{test_data}/{test_data}.npz"
     print(f"Loading test data: {test_data} ...")
     r_wavelengths, r_oxygenations, r_spectra, \
     r_melanin_concentration, r_background_oxygenation, \
     r_distances, r_depths = p.load_spectra_file(IN_FILE)
-
     print("Normalising spectra...")
     gt_oxy = r_oxygenations
     v_spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
-    v_spectra_fp = np.apply_along_axis(p.normalise_sum_to_one, 0, filter_wavelengths(r_spectra))
-
+    try:
+        v_spectra_fp = np.apply_along_axis(p.normalise_sum_to_one, 0, filter_wavelengths(r_spectra))
+    except IndexError:
+        print("Spectra contain 11 wavelengths.")
+        v_spectra_fp = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
     return gt_oxy, v_spectra, v_spectra_fp
 
 
@@ -67,12 +69,14 @@ def filter_wavelengths(spectra):
     return r_spectra
 
 def validate_all(test_data):
-    datasets = ["Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
-                "Point Illumination", "BG 0-100", "BG 60-80",
-                "Heterogeneous with vessels",
-                "Heterogeneous 60-80",
-                "Heterogeneous 0-100", "High Res",
-                "HighRes SmallVess", "Skin"]
+    datasets = [
+                # "Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
+                # "Point Illumination", "BG 0-100", "BG 60-80",
+                # "Heterogeneous with vessels",
+                # "Heterogeneous 60-80",
+                # "Heterogeneous 0-100", "High Res",
+                # "HighRes SmallVess", "Skin",
+                "Acoustic"]
     processes = [None, "thresholded", "smoothed", "noised", "thresholded_smoothed"]
     gt_oxy, v_spectra, v_spectra_fp = get_normalized_validation_and_gt(test_data)
     for dataset in datasets:
