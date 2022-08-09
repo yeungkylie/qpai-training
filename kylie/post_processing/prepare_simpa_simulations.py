@@ -197,13 +197,13 @@ def load_spectra_file(file_path: str) -> tuple:
     depths = data["depths"]
     melanin_concentration = data["melanin_concentration"]
     background_oxygenation = data["background_oxygenation"]
-    # pca_components = data["pca_components"]
+    pca_components = data["pca_components"]
     print("Loading data...[DONE]")
     return (wavelengths, oxygenations, spectra, melanin_concentration,
-            background_oxygenation, distances, depths)
+            background_oxygenation, distances, depths, pca_components)
 
 
-def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets=5, num_samples=100, normalise=True):
+def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets=5, num_samples=100, normalise=True, save_name=None):
     if normalise:
         print("Normalising data...")
         spectra = np.apply_along_axis(normalise_sum_to_one, 0, spectra)
@@ -219,7 +219,10 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
         upper_so2_bound = (sO2_bracket + 1) * (1 / num_sO2_brackets)
         selector = ((oxy >= lower_so2_bound) &
                     (oxy < upper_so2_bound))
-        random_selection = np.random.choice(np.sum(selector), num_samples)
+        try:
+            random_selection = np.random.choice(np.sum(selector), num_samples)
+        except ValueError:
+            random_selection = []
         so2_bracket_oxygenation_values = oxy[selector][random_selection]
         so2_bracket_spectra = spectra[:, selector][:, random_selection]
 
@@ -230,12 +233,12 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
         for idx in range(len(so2_bracket_oxygenation_values)):
             plt.plot(np.linspace(700, 900, 41), so2_bracket_spectra[:, idx],
                      color=mpl.cm.viridis(so2_bracket_oxygenation_values[idx]), linewidth=2, alpha=0.05)
-        # if sO2_bracket == num_sO2_brackets - 1:
-        #     norm = mpl.colors.Normalize(vmin=0, vmax=100)
-        #     sm = plt.cm.ScalarMappable(cmap=mpl.cm.viridis, norm=norm)
-        #     sm.set_array([])
-        #     cb = plt.colorbar(sm, ticks=np.linspace(0, 100, 11))
-        #     cb.set_label("Blood oxygenation [%]")
+        if sO2_bracket == num_sO2_brackets - 1:
+            norm = mpl.colors.Normalize(vmin=0, vmax=100)
+            sm = plt.cm.ScalarMappable(cmap=mpl.cm.viridis, norm=norm)
+            sm.set_array([])
+            cb = plt.colorbar(sm, ticks=np.linspace(0, 100, 11))
+            cb.set_label("Blood oxygenation [%]")
 
         so2_bracket_colouring = colouring[selector][random_selection]
         plt.subplot(num_y_plots, num_sO2_brackets, num_sO2_brackets + sO2_bracket + 1)
@@ -245,12 +248,12 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
             plt.plot(np.linspace(700, 900, 41), so2_bracket_spectra[:, idx],
                      color=mpl.cm.magma(so2_bracket_colouring[idx]), linewidth=2, alpha=0.05)
 
-        # if sO2_bracket == num_sO2_brackets - 1:
-        #     norm = mpl.colors.Normalize(vmin=0, vmax=1)
-        #     sm = plt.cm.ScalarMappable(cmap=mpl.cm.magma, norm=norm)
-        #     sm.set_array([])
-        #     cb = plt.colorbar(sm, ticks=np.linspace(0, 1, 11))
-        #     cb.set_label("Spectral Colouring [a.u.]")
+        if sO2_bracket == num_sO2_brackets - 1:
+            norm = mpl.colors.Normalize(vmin=0, vmax=1)
+            sm = plt.cm.ScalarMappable(cmap=mpl.cm.magma, norm=norm)
+            sm.set_array([])
+            cb = plt.colorbar(sm, ticks=np.linspace(0, 1, 11))
+            cb.set_label("Spectral Colouring [a.u.]")
 
         if num_y_plots > 2:
             so2_bracket_melanin = melanin[selector][random_selection]
@@ -268,7 +271,8 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
                 sm.set_array([])
                 cb = plt.colorbar(sm, ticks=np.linspace(0, 1, 11))
                 cb.set_label("(1-melanin concentration) [a.u.]")
-
+    if save_name is not None:
+        plt.savefig(f"I:/research\seblab\data\group_folders\Kylie\images{save_name}.png")
     plt.tight_layout()
     plt.show()
 
@@ -283,7 +287,7 @@ def visualise_PCA(pca_components, colorcode):
 def extract_spectra(SET_NAME, acoustic=False):
     print(f"--- extracting data from {SET_NAME} ---")
     IN_PATH = f"I:/research\seblab\data\group_folders\Kylie/all simulated data/{SET_NAME}/"
-    OUT_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}_spectra.npz"
+    OUT_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3, acoustic=acoustic)
     combine_spectra_files(IN_PATH, OUT_FILE)
     r_wavelengths, r_oxygenations, r_spectra, \
@@ -291,8 +295,8 @@ def extract_spectra(SET_NAME, acoustic=False):
         r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
     visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
                       r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
-    visualise_PCA(r_pca_components, r_oxygenations)
+    # visualise_PCA(r_pca_components, r_depths)
 
 if __name__ == "__main__":
-    extract_spectra("Acoustic", acoustic=True)
+    extract_spectra("SmallVess")
     print("--- %s seconds ---" % (time.time() - start_time))

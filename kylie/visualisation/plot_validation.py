@@ -49,7 +49,7 @@ def plot_all_mae(test_datasets):
             plt.savefig(os.path.join(OUT_FILE,FILENAME))
             plt.show()
 
-def add_acoustic_metrics(test_datasets):
+def add_metrics(test_datasets):
     for test_data in test_datasets:
         ALL_METRICS = f"I:/research\seblab\data\group_folders\Kylie/validation\metrics/{test_data}_metrics.npz"
         data = np.load(ALL_METRICS)
@@ -60,10 +60,11 @@ def add_acoustic_metrics(test_datasets):
             dataset = (14, "Acoustic")
             gt, prediction, ae, mae = trf.load_test_metrics(dataset[1], n_training_spectra=n_spectra,
                                                             test_data=test_data, process=process[1])
-            all_mae[process[0], dataset[0]] = mae
+            print(mae.shape)
+            all_mae.append(mae)
         print(all_mae)
         # np.savez(ALL_METRICS, all_mae=all_mae, processes=processes, datasets=datasets)
-    print(all_mae)
+    print(all_mae.shape)
 
 
 def plot_gt_vs_predicted(SET_NAME, process, n_spectra, test_data):
