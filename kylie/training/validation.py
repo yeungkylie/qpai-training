@@ -76,7 +76,8 @@ def validate_all(test_data):
                 # "Heterogeneous 60-80",
                 # "Heterogeneous 0-100", "High Res",
                 # "HighRes SmallVess", "Skin",
-                "Acoustic"]
+                # "Acoustic",
+                "SmallVess"]
     processes = [None, "thresholded", "smoothed", "noised", "thresholded_smoothed"]
     gt_oxy, v_spectra, v_spectra_fp = get_normalized_validation_and_gt(test_data)
     for dataset in datasets:

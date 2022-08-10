@@ -7,6 +7,9 @@ import matplotlib.pyplot as plt
 from scipy.ndimage import distance_transform_edt
 import time
 from sklearn.decomposition import PCA
+from kylie.post_processing import postprocessing as pp
+from kylie.training import train_random_forest as trf
+
 
 start_time = time.time()
 
@@ -282,6 +285,7 @@ def visualise_PCA(pca_components, colorcode):
     cm = plt.cm.plasma
     sc = ax.scatter(pca_components[:, 0], pca_components[:, 1], c=colorcode, cmap=cm, s=5)
     plt.colorbar(sc)
+    plt.savefig(f"I:/research\seblab\data\group_folders\Kylie\images\spectra and pca\Baseline_depths.png")
     plt.show()
 
 def extract_spectra(SET_NAME, acoustic=False):
@@ -290,13 +294,16 @@ def extract_spectra(SET_NAME, acoustic=False):
     OUT_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
     read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3, acoustic=acoustic)
     combine_spectra_files(IN_PATH, OUT_FILE)
-    r_wavelengths, r_oxygenations, r_spectra, \
-        r_melanin_concentration, r_background_oxygenation,\
-        r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
-    visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
-                      r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
+    # r_wavelengths, r_oxygenations, r_spectra, \
+    #     r_melanin_concentration, r_background_oxygenation,\
+        # r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
+    # visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
+    #                   r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
     # visualise_PCA(r_pca_components, r_depths)
 
 if __name__ == "__main__":
-    extract_spectra("SmallVess")
+    # extract_spectra("SmallVess")
+    pp.generate_processed_datasets("SmallVess")
+    trf.train_all("SmallVess", n_spectra=50000, flowphantom=True)
+
     print("--- %s seconds ---" % (time.time() - start_time))

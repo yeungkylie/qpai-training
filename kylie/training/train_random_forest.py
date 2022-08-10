@@ -83,14 +83,14 @@ def train_random_forests(SET_NAME, n_spectra, flowphantom, process=None, visuali
 
 
 def train_all(SET_NAME, n_spectra, flowphantom=False):
-    train_random_forests(SET_NAME, n_spectra, flowphantom=flowphantom)
+    # train_random_forests(SET_NAME, n_spectra, flowphantom=flowphantom)
     try:
         train_random_forests(SET_NAME, n_spectra, flowphantom, process="thresholded")
     except FileNotFoundError:
         print("Thresholded spectra does not exist")
         pass
-    train_random_forests(SET_NAME, n_spectra, flowphantom, process="smoothed")
-    train_random_forests(SET_NAME, n_spectra, flowphantom, process="noised")
+    # train_random_forests(SET_NAME, n_spectra, flowphantom, process="smoothed")
+    # train_random_forests(SET_NAME, n_spectra, flowphantom, process="noised")
     try:
         train_random_forests(SET_NAME, n_spectra, flowphantom, process="thresholded_smoothed")
     except FileNotFoundError:
