@@ -3,12 +3,75 @@ from kylie.post_processing import prepare_simpa_simulations as p
 import numpy as np
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
-import matplotlib
+import matplotlib as mpl
 import pickle
 from kylie.training import validation as v
 
+def compute_spectra_plot(SET_NAME, save_name=None):
+    print(f"Generating spectra plot for {SET_NAME}...")
+    num_y_plots = 5
+    num_sO2_brackets = 5
+    num_samples = 300
+    plt.figure(figsize=(4 * num_sO2_brackets, 4*num_y_plots))
+    mpl.rcParams.update({'font.size': 12})
+    processes = [None, "thresholded", "smoothed", "noised", "thresholded_smoothed"]
+    process_name = ["No Processing",
+                    "Thresholded",
+                    "Smoothed",
+                    "Noised",
+                    "Thresholded and Smoothed"]
+    for process in enumerate(processes):
+        n = process[0]
+        if process[1] is None:
+            SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
+        else:
+            SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/{SET_NAME}/{SET_NAME}_{process[1]}_spectra.npz"
+        r_wavelengths, oxy, r_spectra, \
+        r_melanin_concentration, r_background_oxygenation, \
+        distances, depths, r_pca_components = p.load_spectra_file(SPECTRA)
+        spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
+        colouring = distances * depths
 
-def compute_pca_plot(spectra, oxygenations, wavelengths, save_path=None):
+        for sO2_bracket in range(num_sO2_brackets):
+            lower_so2_bound = sO2_bracket * (1 / num_sO2_brackets)
+            upper_so2_bound = (sO2_bracket + 1) * (1 / num_sO2_brackets)
+            selector = ((oxy >= lower_so2_bound) &
+                        (oxy < upper_so2_bound))
+            try:
+                random_selection = np.random.choice(np.sum(selector), num_samples)
+            except ValueError:
+                random_selection = []
+            so2_bracket_spectra = spectra[:, selector][:, random_selection]
+            ax = plt.subplot(num_y_plots, num_sO2_brackets, num_sO2_brackets * n + sO2_bracket + 1)
+            so2_bracket_colouring = colouring[selector][random_selection]
+            if sO2_bracket == 0:
+                plt.ylabel(process_name[n], {'size': 20})
+            if n == 0:
+                plt.title(f"{lower_so2_bound * 100:3.1f}% to {upper_so2_bound * 100:3.1f}% oxygenation",{'size': 14})
+            for idx in range(len(so2_bracket_colouring)):
+                plt.plot(np.linspace(700, 900, 41), so2_bracket_spectra[:, idx],
+                         color=mpl.cm.magma(so2_bracket_colouring[idx]), linewidth=2, alpha=0.05)
+                ax.xaxis.set_major_locator(plt.MaxNLocator(3))
+                ax.yaxis.set_major_locator(plt.MaxNLocator(3))
+                if n == 4:
+                    plt.xlabel("Wavelength [nm]")
+            if sO2_bracket == num_sO2_brackets - 1:
+                norm = mpl.colors.Normalize(vmin=0, vmax=1)
+                sm = plt.cm.ScalarMappable(cmap=mpl.cm.magma, norm=norm)
+                sm.set_array([])
+                cb = plt.colorbar(sm, ticks=np.linspace(0, 1, 11))
+                cb.set_label("Spectral Colouring [a.u.]")
+                cb.ax.set_yticks([1, 0.75, 0.5, 0.25, 0])
+                cb.ax.set_yticklabels(['1', '0.25', '0.5', '0.25', '0'])
+    # plt.title(f"{SET_NAME}")
+
+    if save_name is not None:
+        plt.savefig(f"I:/research\seblab\data\group_folders\Kylie\images\{save_name}.png")
+    plt.tight_layout()
+    plt.show()
+
+
+def compute_pca_plot(spectra, oxygenations, wavelengths, plot_title=None, save_path=None):
 
     PCA_PATH = r"I:\research\seblab\data\group_folders\Janek\learned_pa_oximetry\validation_data/pca/"
 
@@ -47,7 +110,7 @@ def compute_pca_plot(spectra, oxygenations, wavelengths, save_path=None):
     data_pca_components = pca.transform(spectra.T)
     fig, ax = plt.subplots()
 
-    light_cividis = cmap_map(lambda x: x / 2 + 0.5, matplotlib.cm.viridis)
+    light_cividis = cmap_map(lambda x: x / 2 + 0.5, mpl.cm.viridis)
     print(f"Shuffling baseline spectra ...")
     random_order = np.random.choice(len(baseline_pca_components), len(baseline_pca_components), replace=False)
     sc1 = ax.scatter(baseline_pca_components[random_order, 0], baseline_pca_components[random_order, 1],
@@ -60,6 +123,10 @@ def compute_pca_plot(spectra, oxygenations, wavelengths, save_path=None):
                      c=oxygenations[random_order] * 100, cmap='magma', s=2, alpha=1)
     cbar2 = plt.colorbar(sc2)
     cbar2.set_label("sO$_2$ of target spectra [%]")
+    plt.xlabel("Principal Component 1")
+    plt.ylabel("Principal Component 2")
+    if plot_title is not None:
+        plt.title(plot_title)
     plt.tight_layout()
     if save_path is not None:
         plt.savefig(save_path)
@@ -73,7 +140,7 @@ def cmap_map(function, cmap):
     """
     old_LUT = np.asarray(cmap.colors)
     new_LUT = map(function, old_LUT)
-    return matplotlib.colors.ListedColormap(list(new_LUT))
+    return mpl.colors.ListedColormap(list(new_LUT))
 
 
 if __name__ == "__main__":
@@ -86,24 +153,36 @@ if __name__ == "__main__":
                 "Acoustic", "SmallVess"]
     wavelengths = [700, 720, 740, 760, 780, 800, 820, 840, 860, 880, 900]
     # wavelengths = np.linspace(700,900,41)
-    SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/Baseline/Baseline_spectra.npz"
-    r_wavelengths, r_oxygenations, r_spectra, \
-    r_melanin_concentration, r_background_oxygenation, \
-    r_distances, r_depths, r_pca_components = p.load_spectra_file(SPECTRA)
-
-    for SET_NAME in datasets:
-        SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\spectra and pca/{SET_NAME}_pca_{len(wavelengths)}.png"
-        if not os.path.exists(SAVE_PATH):
-            print(f"Generating PCA plot for {SET_NAME}...")
-            SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
-            r_wavelengths, r_oxygenations, r_spectra, \
-            r_melanin_concentration, r_background_oxygenation, \
-            r_distances, r_depths, r_pca_components = p.load_spectra_file(SPECTRA)
-            r_spectra = v.filter_wavelengths(r_spectra)
-            spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
-            compute_pca_plot(spectra, r_oxygenations, wavelengths, save_path=SAVE_PATH)
-        else:
-            print(f"{SET_NAME}_pca.png already exists.")
+    # SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/Baseline/Baseline_spectra.npz"
+    # r_wavelengths, r_oxygenations, r_spectra, \
+    # r_melanin_concentration, r_background_oxygenation, \
+    # r_distances, r_depths, r_pca_components = p.load_spectra_file(SPECTRA)
+    in_silico = [
+                "Simulation1_SingleVesselInWater",
+                 "Simulation2_SingleVesselInBlood",
+                 "Simulation3_VesselDeepInWater",
+                 "Simulation4_HeterogeneousDistribution",
+                 "Simulation5_ForearmInitialPressure",
+                 "Simulation6_ForearmReconstructedData"]
+    in_vitro = ["Phantom1_flow_phantom_no_melanin",
+                "Phantom2_flow_phantom_medium_melanin"]
+    compute_spectra_plot("0.6mm Res")
+    # for SET_NAME in datasets:
+    #     SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\pca no/{SET_NAME}_pca.png"
+    #     # SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\pca/test_sets/{SET_NAME[1]}_pca_{len(wavelengths)}.png"
+    #     if not os.path.exists(SAVE_PATH):
+    #         print(f"Generating PCA plot for {SET_NAME}...")
+    #         SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
+    #         # SPECTRA = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_vitro/{SET_NAME[1]}/{SET_NAME[1]}.npz"
+    #         r_wavelengths, r_oxygenations, r_spectra, \
+    #         r_melanin_concentration, r_background_oxygenation, \
+    #         r_distances, r_depths, r_pca_components = p.load_spectra_file(SPECTRA)
+    #         # r_spectra = v.filter_wavelengths(r_spectra)
+    #         spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
+    #         # compute_pca_plot(spectra, r_oxygenations, wavelengths, plot_title=f"{SET_NAME}", save_path=SAVE_PATH)
+    #         compute_spectra_plot(spectra, r_oxygenations, r_melanin_concentration, r_distances, r_depths, num_samples=300, normalise=False)
+    #     else:
+    #         print(f"{SET_NAME}_pca.png already exists.")
 
 ### Kylie
     # baseline_spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, v.filter_wavelengths(r_spectra))  # normalise

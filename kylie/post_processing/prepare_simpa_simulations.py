@@ -200,7 +200,10 @@ def load_spectra_file(file_path: str) -> tuple:
     depths = data["depths"]
     melanin_concentration = data["melanin_concentration"]
     background_oxygenation = data["background_oxygenation"]
-    pca_components = data["pca_components"]
+    try:
+        pca_components = data["pca_components"]
+    except KeyError:
+        pca_components = None
     print("Loading data...[DONE]")
     return (wavelengths, oxygenations, spectra, melanin_concentration,
             background_oxygenation, distances, depths, pca_components)
@@ -246,6 +249,7 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
         so2_bracket_colouring = colouring[selector][random_selection]
         plt.subplot(num_y_plots, num_sO2_brackets, num_sO2_brackets + sO2_bracket + 1)
         if sO2_bracket == 0:
+            plt.xlabel("Wavelength [nm]")
             plt.ylabel("Coloured by Spectral Colouring")
         for idx in range(len(so2_bracket_colouring)):
             plt.plot(np.linspace(700, 900, 41), so2_bracket_spectra[:, idx],
@@ -275,7 +279,7 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
                 cb = plt.colorbar(sm, ticks=np.linspace(0, 1, 11))
                 cb.set_label("(1-melanin concentration) [a.u.]")
     if save_name is not None:
-        plt.savefig(f"I:/research\seblab\data\group_folders\Kylie\images{save_name}.png")
+        plt.savefig(f"I:/research\seblab\data\group_folders\Kylie\images\{save_name}.png")
     plt.tight_layout()
     plt.show()
 
@@ -292,18 +296,31 @@ def extract_spectra(SET_NAME, acoustic=False):
     print(f"--- extracting data from {SET_NAME} ---")
     IN_PATH = f"I:/research\seblab\data\group_folders\Kylie/all simulated data/{SET_NAME}/"
     OUT_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
-    read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3, acoustic=acoustic)
-    combine_spectra_files(IN_PATH, OUT_FILE)
-    # r_wavelengths, r_oxygenations, r_spectra, \
-    #     r_melanin_concentration, r_background_oxygenation,\
-        # r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
-    # visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
-    #                   r_distances, r_depths, num_sO2_brackets=4, num_samples=300)
+    # read_hdf5_and_extract_spectra(IN_PATH, target_tissue_class=3, acoustic=acoustic)
+    # combine_spectra_files(IN_PATH, OUT_FILE)
+    r_wavelengths, r_oxygenations, r_spectra, \
+        r_melanin_concentration, r_background_oxygenation,\
+        r_distances, r_depths, r_pca_components = load_spectra_file(OUT_FILE)
+    visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
+                      r_distances, r_depths, num_sO2_brackets=5, num_samples=300, save_name=f"{SET_NAME}")
     # visualise_PCA(r_pca_components, r_depths)
 
 if __name__ == "__main__":
-    # extract_spectra("SmallVess")
-    pp.generate_processed_datasets("SmallVess")
-    trf.train_all("SmallVess", n_spectra=50000, flowphantom=True)
+    datasets = [
+                # "Baseline",
+                # "0.6mm Res", "1.2mm Res",
+                # "5mm Illumination",
+                "Point Illumination",
+                "BG 60-80", "BG 0-100",
+                "Heterogeneous with vessels",
+                # "Heterogeneous 60-80",
+                # "Heterogeneous 0-100",
+                "High Res", "HighRes SmallVess",
+                "Skin", "Acoustic", "SmallVess"]
+
+    for dataset in datasets:
+        extract_spectra(dataset)
+
+    test_datasets = []
 
     print("--- %s seconds ---" % (time.time() - start_time))

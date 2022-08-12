@@ -7,7 +7,7 @@ from kylie.post_processing import prepare_simpa_simulations as p
 
 def aggregated_model(SET_NAME, process, n_training_spectra, v_spectra, gt_oxy, flowphantom=True):
     OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie/validation/{test_data}/{n_training_spectra}/"
-    OUT_FILE = f"{SET_NAME}_{process}_validation.npz"
+    OUT_FILE = f"{SET_NAME}_{process}_0.5_validation.npz"
     if os.path.exists(os.path.join(OUT_FOLDER,OUT_FILE)):
         print(f"Metrics already saved. Skipping ...")
         return
@@ -45,7 +45,7 @@ def aggregated_model(SET_NAME, process, n_training_spectra, v_spectra, gt_oxy, f
 
 
 def get_normalized_validation_and_gt(test_data):
-    IN_FILE = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_vitro/{test_data}/{test_data}.npz"
+    IN_FILE = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_silico/{test_data}/{test_data}.npz"
     print(f"Loading test data: {test_data} ...")
     r_wavelengths, r_oxygenations, r_spectra, \
     r_melanin_concentration, r_background_oxygenation, \
@@ -55,6 +55,7 @@ def get_normalized_validation_and_gt(test_data):
     v_spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
     try:
         v_spectra_fp = np.apply_along_axis(p.normalise_sum_to_one, 0, filter_wavelengths(r_spectra))
+        v_spectra_fp = v_spectra_fp
     except IndexError:
         print("Spectra contain 11 wavelengths.")
         v_spectra_fp = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
@@ -70,13 +71,13 @@ def filter_wavelengths(spectra):
 
 def validate_all(test_data):
     datasets = [
-                # "Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
-                # "Point Illumination", "BG 0-100", "BG 60-80",
-                # "Heterogeneous with vessels",
-                # "Heterogeneous 60-80",
-                # "Heterogeneous 0-100", "High Res",
-                # "HighRes SmallVess", "Skin",
-                # "Acoustic",
+                "Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
+                "Point Illumination", "BG 0-100", "BG 60-80",
+                "Heterogeneous with vessels",
+                "Heterogeneous 60-80",
+                "Heterogeneous 0-100", "High Res",
+                "HighRes SmallVess", "Skin",
+                "Acoustic",
                 "SmallVess"]
     processes = [None, "thresholded", "smoothed", "noised", "thresholded_smoothed"]
     gt_oxy, v_spectra, v_spectra_fp = get_normalized_validation_and_gt(test_data)
@@ -87,11 +88,17 @@ def validate_all(test_data):
             aggregated_model(dataset, process, 50000, v_spectra_fp, gt_oxy)
 
 if __name__ == "__main__":
-    in_silico = ["Simulation1_SingleVesselInWater",
-                 "Simulation2_SingleVesselInBlood",
-                 "Simulation3_VesselDeepInWater",
-                 "Simulation4_HeterogeneousDistribution"]
+    in_silico = [
+                # "Simulation1_SingleVesselInWater",
+                #  "Simulation2_SingleVesselInBlood",
+                #  "Simulation3_VesselDeepInWater",
+                #  "Simulation4_HeterogeneousDistribution",
+                #  "Simulation5_ForearmInitialPressure",
+                 "Simulation6_ForearmReconstructedData"]
     in_vitro = ["Phantom1_flow_phantom_no_melanin",
                 "Phantom2_flow_phantom_medium_melanin"]
-    for test_data in in_vitro:
+    # for test_data in in_vitro:
+    #       validate_all(test_data)
+
+    for test_data in in_silico:
           validate_all(test_data)

@@ -117,17 +117,33 @@ def generate_processed_datasets(SET_NAME, spacing = 0.3):
                  depths=new_depths,
                  distances=new_distances,
                  pca_components=old["pca_components"])
+def plot_processed_spectra(SET_NAME, process):
+    if process is None:
+        OUT_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
+    else:
+        OUT_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_{process}_spectra.npz"
+    r_wavelengths, r_oxygenations, r_spectra, \
+        r_melanin_concentration, r_background_oxygenation,\
+        r_distances, r_depths, r_pca_components = p.load_spectra_file(OUT_FILE)
+    p.visualise_spectra(r_spectra, r_oxygenations, r_melanin_concentration,
+                      r_distances, r_depths, num_sO2_brackets=5, num_samples=300, save_name=f"spectra/{SET_NAME}_{process}")
 
 
 if __name__ == "__main__":
-    # generate_processed_datasets("0.6mm Res", spacing=0.6)
-    # generate_processed_datasets("1.2mm Res", spacing=1.2)
-    # generate_processed_datasets("5mm Illumination")
-    # generate_processed_datasets("BG 0-100")
-    # generate_processed_datasets("BG 60-80")
-    # generate_processed_datasets("Heterogeneous with vessels")
-    # generate_processed_datasets("High Res", spacing=0.15)
-    # generate_processed_datasets("HighRes SmallVess", spacing=0.15)
-    # generate_processed_datasets("Point Illumination")
-    # generate_processed_datasets("Skin")
-    generate_processed_datasets("Acoustic")
+    processes = ["thresholded","smoothed","noised","thresholded_smoothed"]
+    datasets = [
+                "Baseline",
+                "0.6mm Res", "1.2mm Res",
+                "5mm Illumination",
+                "Point Illumination",
+                "BG 60-80", "BG 0-100",
+                "Heterogeneous with vessels",
+                # "Heterogeneous 60-80",
+                # "Heterogeneous 0-100",
+                "High Res", "HighRes SmallVess",
+                "Skin", "Acoustic", "SmallVess"]
+    for SET_NAME in datasets:
+        print(f"Generating spectra plot for {SET_NAME}...")
+        for process in processes:
+            print(f"Generating spectra plot for {process}...")
+            plot_processed_spectra(SET_NAME, process)
