@@ -206,7 +206,7 @@ def load_spectra_file(file_path: str) -> tuple:
         pca_components = None
     print("Loading data...[DONE]")
     return (wavelengths, oxygenations, spectra, melanin_concentration,
-            background_oxygenation, distances, depths, pca_components)
+            background_oxygenation, distances, depths)
 
 
 def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets=5, num_samples=100, normalise=True, save_name=None):

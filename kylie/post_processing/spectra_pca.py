@@ -28,7 +28,7 @@ def compute_spectra_plot(SET_NAME, save_name=None):
             SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/{SET_NAME}/{SET_NAME}_{process[1]}_spectra.npz"
         r_wavelengths, oxy, r_spectra, \
         r_melanin_concentration, r_background_oxygenation, \
-        distances, depths, r_pca_components = p.load_spectra_file(SPECTRA)
+        distances, depths = p.load_spectra_file(SPECTRA)
         spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
         colouring = distances * depths
 
@@ -66,7 +66,7 @@ def compute_spectra_plot(SET_NAME, save_name=None):
     # plt.title(f"{SET_NAME}")
 
     if save_name is not None:
-        plt.savefig(f"I:/research\seblab\data\group_folders\Kylie\images\{save_name}.png")
+        plt.savefig(save_name)
     plt.tight_layout()
     plt.show()
 
@@ -145,9 +145,13 @@ def cmap_map(function, cmap):
 
 if __name__ == "__main__":
     datasets = [
-                "0.6mm Res", "1.2mm Res", "5mm Illumination",
+                "Baseline",
+                "0.6mm Res",
+                "1.2mm Res",
+                "5mm Illumination",
                 "BG 0-100", "BG 60-80", "Point Illumination",
-                "Heterogeneous with vessels", "Heterogeneous 60-80",
+                "Heterogeneous with vessels",
+                # "Heterogeneous 60-80",
                 # "Heterogeneous 0-100",
                 "High Res", "HighRes SmallVess", "Point Illumination", "Skin",
                 "Acoustic", "SmallVess"]
@@ -166,9 +170,9 @@ if __name__ == "__main__":
                  "Simulation6_ForearmReconstructedData"]
     in_vitro = ["Phantom1_flow_phantom_no_melanin",
                 "Phantom2_flow_phantom_medium_melanin"]
-    compute_spectra_plot("0.6mm Res")
-    # for SET_NAME in datasets:
-    #     SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\pca no/{SET_NAME}_pca.png"
+    for SET_NAME in datasets:
+        SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\processed_spectra/{SET_NAME}_processed.png"
+        compute_spectra_plot(SET_NAME, save_name=SAVE_PATH)
     #     # SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\pca/test_sets/{SET_NAME[1]}_pca_{len(wavelengths)}.png"
     #     if not os.path.exists(SAVE_PATH):
     #         print(f"Generating PCA plot for {SET_NAME}...")

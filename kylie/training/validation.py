@@ -7,10 +7,10 @@ from kylie.post_processing import prepare_simpa_simulations as p
 
 def aggregated_model(SET_NAME, process, n_training_spectra, v_spectra, gt_oxy, flowphantom=True):
     OUT_FOLDER = f"I:/research\seblab\data\group_folders\Kylie/validation/{test_data}/{n_training_spectra}/"
-    OUT_FILE = f"{SET_NAME}_{process}_0.5_validation.npz"
-    if os.path.exists(os.path.join(OUT_FOLDER,OUT_FILE)):
-        print(f"Metrics already saved. Skipping ...")
-        return
+    OUT_FILE = f"{SET_NAME}_{process}_validation.npz"
+    # if os.path.exists(os.path.join(OUT_FOLDER,OUT_FILE)):
+    #     print(f"Metrics already saved. Skipping ...")
+    #     return
 
     validation_spectra = v_spectra.T  # transposed to fit dimensions
 
@@ -71,29 +71,30 @@ def filter_wavelengths(spectra):
 
 def validate_all(test_data):
     datasets = [
-                "Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
-                "Point Illumination", "BG 0-100", "BG 60-80",
-                "Heterogeneous with vessels",
-                "Heterogeneous 60-80",
-                "Heterogeneous 0-100", "High Res",
-                "HighRes SmallVess", "Skin",
-                "Acoustic",
+                # "Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
+                # "Point Illumination", "BG 0-100", "BG 60-80",
+                # "Heterogeneous with vessels",
+                # "Heterogeneous 60-80",
+                # "Heterogeneous 0-100",
+                # "High Res",
+                # "HighRes SmallVess", "Skin",
+                # "Acoustic",
                 "SmallVess"]
-    processes = [None, "thresholded", "smoothed", "noised", "thresholded_smoothed"]
+    # processes = [None, "thresholded", "smoothed", "noised", "thresholded_smoothed"]
+    processes = ["smoothed", "thresholded_smoothed"]
     gt_oxy, v_spectra, v_spectra_fp = get_normalized_validation_and_gt(test_data)
     for dataset in datasets:
         for process in processes:
             print(f"Testing on {dataset} {process} model...")
-            # aggregated_model(dataset, process, 400000, v_spectra, gt_oxy, flowphantom=False)
             aggregated_model(dataset, process, 50000, v_spectra_fp, gt_oxy)
 
 if __name__ == "__main__":
     in_silico = [
-                # "Simulation1_SingleVesselInWater",
-                #  "Simulation2_SingleVesselInBlood",
-                #  "Simulation3_VesselDeepInWater",
-                #  "Simulation4_HeterogeneousDistribution",
-                #  "Simulation5_ForearmInitialPressure",
+                "Simulation1_SingleVesselInWater",
+                 "Simulation2_SingleVesselInBlood",
+                 "Simulation3_VesselDeepInWater",
+                 "Simulation4_HeterogeneousDistribution",
+                 "Simulation5_ForearmInitialPressure",
                  "Simulation6_ForearmReconstructedData"]
     in_vitro = ["Phantom1_flow_phantom_no_melanin",
                 "Phantom2_flow_phantom_medium_melanin"]

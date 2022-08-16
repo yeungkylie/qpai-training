@@ -37,7 +37,7 @@ def noise_initial_pressure(spectra):
 def smooth_spectra(spectra):
         print("Applying smoothing ...")
         sigma = 1
-        spectra = gaussian_filter1d(spectra, sigma)
+        spectra = gaussian_filter1d(spectra, sigma, axis=0)
         print("Applying smoothing ... [DONE]")
         return spectra
 
@@ -65,18 +65,18 @@ def generate_processed_datasets(SET_NAME, spacing = 0.3):
         old = np.load(IN_FILE, allow_pickle=True)
 
         # extract distances
-        thresholded_spectra, new_oxy, new_distances, new_depths \
-                = distance_threshold(r_spectra, r_oxygenations, r_distances, r_depths, spacing=spacing)
-        THRESHOLDED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_thresholded_spectra.npz"
-        np.savez(THRESHOLDED_FILE,
-                 wavelengths=old["wavelengths"],
-                 oxygenations=new_oxy,
-                 spectra=thresholded_spectra,
-                 melanin_concentration=old["melanin_concentration"],
-                 background_oxygenation=old["background_oxygenation"],
-                 depths=new_depths,
-                 distances=new_distances,
-                 pca_components=old["pca_components"])
+        # thresholded_spectra, new_oxy, new_distances, new_depths \
+        #         = distance_threshold(r_spectra, r_oxygenations, r_distances, r_depths, spacing=spacing)
+        # THRESHOLDED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_thresholded_spectra.npz"
+        # np.savez(THRESHOLDED_FILE,
+        #          wavelengths=old["wavelengths"],
+        #          oxygenations=new_oxy,
+        #          spectra=thresholded_spectra,
+        #          melanin_concentration=old["melanin_concentration"],
+        #          background_oxygenation=old["background_oxygenation"],
+        #          depths=new_depths,
+        #          distances=new_distances,
+        #          pca_components=old["pca_components"])
 
         # noised
         # noised_spectra = noise_initial_pressure(r_spectra)
@@ -93,16 +93,16 @@ def generate_processed_datasets(SET_NAME, spacing = 0.3):
 
         # smoothed
         smoothed_spectra = smooth_spectra(r_spectra)
-        # SMOOTHED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_smoothed_spectra.npz"
-        # np.savez(SMOOTHED_FILE,
-        #          wavelengths=old["wavelengths"],
-        #          oxygenations=old["oxygenations"],
-        #          spectra=smoothed_spectra,
-        #          melanin_concentration=old["melanin_concentration"],
-        #          background_oxygenation=old["background_oxygenation"],
-        #          depths=old["depths"],
-        #          distances=old["distances"],
-        #          pca_components=old["pca_components"])
+        SMOOTHED_FILE = f"I:/research\seblab\data\group_folders\Kylie/datasets/{SET_NAME}/{SET_NAME}_smoothed_spectra.npz"
+        np.savez(SMOOTHED_FILE,
+                 wavelengths=old["wavelengths"],
+                 oxygenations=old["oxygenations"],
+                 spectra=smoothed_spectra,
+                 melanin_concentration=old["melanin_concentration"],
+                 background_oxygenation=old["background_oxygenation"],
+                 depths=old["depths"],
+                 distances=old["distances"],
+                 pca_components=old["pca_components"])
 
         # thresholded and smoothed
         thresholded_smoothed_spectra, new_oxy, new_distances, new_depths \
@@ -132,18 +132,20 @@ def plot_processed_spectra(SET_NAME, process):
 if __name__ == "__main__":
     processes = ["thresholded","smoothed","noised","thresholded_smoothed"]
     datasets = [
-                "Baseline",
-                "0.6mm Res", "1.2mm Res",
-                "5mm Illumination",
-                "Point Illumination",
-                "BG 60-80", "BG 0-100",
-                "Heterogeneous with vessels",
+                # "Baseline",
+                # "0.6mm Res",
+                # "1.2mm Res",
+                # "5mm Illumination",
+                # "Point Illumination",
+                # "BG 60-80", "BG 0-100",
+                # "Heterogeneous with vessels",
                 # "Heterogeneous 60-80",
                 # "Heterogeneous 0-100",
-                "High Res", "HighRes SmallVess",
-                "Skin", "Acoustic", "SmallVess"]
+                "High Res", "HighRes SmallVess"]
+                # "Skin", "Acoustic", "SmallVess"]
     for SET_NAME in datasets:
-        print(f"Generating spectra plot for {SET_NAME}...")
-        for process in processes:
-            print(f"Generating spectra plot for {process}...")
-            plot_processed_spectra(SET_NAME, process)
+        print(f"Generating smoothed spectra for {SET_NAME}...")
+        generate_processed_datasets(SET_NAME, spacing=0.15)
+        # for process in processes:
+        #     print(f"Generating smoothed spectra for {process}...")
+        #     plot_processed_spectra(SET_NAME, process)

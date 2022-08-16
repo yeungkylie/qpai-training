@@ -55,25 +55,18 @@ def add_metrics(test_datasets):
         data = np.load(ALL_METRICS)
         all_mae = data['all_mae']
         print(all_mae.shape)
-        mae_p = np.empty((5,1))
-        datasets_all = ["Baseline",
-                        "0.6mm Res", "1.2mm Res",
-                        "5mm Illumination", "Point Illumination",
-                        "BG 60-80", "BG 0-100",
-                        "Heterogeneous with vessels", "Heterogeneous 60-80",
-                        "Heterogeneous 0-100",
-                        "High Res", "HighRes SmallVess",
-                        "Skin", "Acoustic", "SmallVess"]
-
-        for process in enumerate(processes):
+        process=(2, "smoothed")
+        for dataset in enumerate(datasets):
+            print(dataset)
             n_spectra = 50000
-            dataset = (15, "SmallVess")
             gt, prediction, ae, mae = trf.load_test_metrics(dataset[1], n_training_spectra=n_spectra,
                                                             test_data=test_data, process=process[1])
-            mae_p[process[0],:] = mae
-        new_mae = np.hstack((all_mae,mae_p))
-        print(new_mae.shape)
-        np.savez(ALL_METRICS, all_mae=new_mae, processes=processes, datasets=datasets_all)
+            print(f"old: {all_mae[process[0],dataset[0]]}")
+            all_mae[process[0],dataset[0]] = mae
+            print(f"new: {mae}")
+        new_mae = all_mae
+        print(new_mae)
+        np.savez(ALL_METRICS, all_mae=new_mae, processes=processes, datasets=datasets)
 
 
 
@@ -100,20 +93,21 @@ if __name__ == "__main__":
                 "Skin", "Acoustic", "SmallVess"]
 
     processes = [None, "thresholded", "smoothed", "noised", "thresholded_smoothed"]
-    # processes = ["thresholded","noised"]
+    for process in enumerate(processes):
+        print(process)
 
     in_silico = [
-        # "Simulation1_SingleVesselInWater",
-        # "Simulation2_SingleVesselInBlood",
-        # "Simulation3_VesselDeepInWater",
-        # "Simulation4_HeterogeneousDistribution",
-        # "Simulation5_ForearmInitialPressure",
+        "Simulation1_SingleVesselInWater",
+        "Simulation2_SingleVesselInBlood",
+        "Simulation3_VesselDeepInWater",
+        "Simulation4_HeterogeneousDistribution",
+        "Simulation5_ForearmInitialPressure",
         "Simulation6_ForearmReconstructedData"]
     in_vitro = ["Phantom1_flow_phantom_no_melanin",
                 "Phantom2_flow_phantom_medium_melanin"]
 
-    plot_all_mae(in_silico)
+    # plot_all_mae(in_silico)
     # plot_all_mae(in_vitro)
     # plot_gt_vs_predicted("Baseline", None, 50000, "Simulation1_SingleVesselInWater")
     # add_metrics(in_silico)
-    # add_metrics(in_vitro)
+    add_metrics(in_vitro)

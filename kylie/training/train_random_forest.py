@@ -16,7 +16,7 @@ def get_normalised_spectra_oxy(SET_NAME, n_spectra, process, visualise, flowphan
     print(f"Retreived training dataset {IN_FILE}")
     r_wavelengths, r_oxygenations, r_spectra, \
     r_melanin_concentration, r_background_oxygenation, \
-    r_distances, r_depths, r_pca_components = p.load_spectra_file(IN_FILE)
+    r_distances, r_depths = p.load_spectra_file(IN_FILE)
 
     if flowphantom:
         flowphantom_wavelengths = np.asarray([700, 720, 740, 760, 780, 800, 820, 840, 860, 880, 900])
@@ -84,12 +84,12 @@ def train_random_forests(SET_NAME, n_spectra, flowphantom, process=None, visuali
 
 def train_all(SET_NAME, n_spectra, flowphantom=False):
     # train_random_forests(SET_NAME, n_spectra, flowphantom=flowphantom)
-    try:
-        train_random_forests(SET_NAME, n_spectra, flowphantom, process="thresholded")
-    except FileNotFoundError:
-        print("Thresholded spectra does not exist")
-        pass
-    # train_random_forests(SET_NAME, n_spectra, flowphantom, process="smoothed")
+    # try:
+    #     train_random_forests(SET_NAME, n_spectra, flowphantom, process="thresholded")
+    # except FileNotFoundError:
+    #     print("Thresholded spectra does not exist")
+    #     pass
+    train_random_forests(SET_NAME, n_spectra, flowphantom, process="smoothed")
     # train_random_forests(SET_NAME, n_spectra, flowphantom, process="noised")
     try:
         train_random_forests(SET_NAME, n_spectra, flowphantom, process="thresholded_smoothed")
@@ -138,14 +138,16 @@ def load_all_metrics(SET_NAME, n_spectra, flowphantom = False):
 
 
 if __name__ == "__main__":
-    datasets = ["Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
-                "Point Illumination", "BG 0-100", "BG 60-80",
-                "Heterogeneous with vessels", "Heterogeneous 60-80",
-                "Heterogeneous 0-100", "High Res",
-                "HighRes SmallVess", "Point Illumination", "Skin", "Acoustic"]
+    datasets = [
+                # "Baseline", "0.6mm Res", "1.2mm Res", "5mm Illumination",
+                # "Point Illumination", "BG 0-100", "BG 60-80",
+                # "Heterogeneous with vessels", "Heterogeneous 60-80",
+                # "Heterogeneous 0-100", "High Res",
+                # "HighRes SmallVess", "Point Illumination", "Skin", "Acoustic",
+                "SmallVess"]
     for dataset in datasets:
         train_all(dataset, n_spectra=50000, flowphantom=True)
-        train_all(dataset, n_spectra=50000)
+        # train_all(dataset, n_spectra=50000)
         # train_all(dataset, n_spectra=77000)
 
     print("--- %s seconds ---" % (time.time() - start_time))
