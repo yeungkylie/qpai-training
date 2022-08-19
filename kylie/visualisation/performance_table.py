@@ -10,7 +10,7 @@ files = glob.glob(os.path.join(path, "*.npz"))
 files.sort()
 collated_mae = [[] for i in range(75)]
 mae_all = [[] for i in range(15)]
-excel_path = os.path.join(path, "metrics.xlsx")
+excel_path = os.path.join(path, "raw_metrics.xlsx")
 for file in files:
     print(file)
     data = np.load(file, allow_pickle=True)

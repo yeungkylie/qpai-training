@@ -102,9 +102,9 @@ def compute_pca_plot(spectra, oxygenations, wavelengths, plot_title=None, save_p
                  baseline_spectra=baseline_spectra,
                  oxygenation=baseline_oxygenation)
     print("Subsampling data spectra ...")
-    spectra_choice = np.random.choice(np.shape(spectra)[1], 50000, replace=False)
-    spectra = spectra[:, spectra_choice]
-    oxygenations = oxygenations[spectra_choice]
+    # spectra_choice = np.random.choice(np.shape(spectra)[1], 50000, replace=False)
+    # spectra = spectra[:, spectra_choice]
+    # oxygenations = oxygenations[spectra_choice]
 
     baseline_pca_components = pca.transform(baseline_spectra.T)
     data_pca_components = pca.transform(spectra.T)
@@ -122,7 +122,8 @@ def compute_pca_plot(spectra, oxygenations, wavelengths, plot_title=None, save_p
     sc2 = ax.scatter(data_pca_components[random_order, 0], data_pca_components[random_order, 1],
                      c=oxygenations[random_order] * 100, cmap='magma', s=2, alpha=1)
     cbar2 = plt.colorbar(sc2)
-    cbar2.set_label("sO$_2$ of target spectra [%]")
+    # cbar2.set_label("sO$_2$ of target spectra [%]")
+    cbar2.set_label("Oxygenation [%]")
     plt.xlabel("Principal Component 1")
     plt.ylabel("Principal Component 2")
     if plot_title is not None:
@@ -170,23 +171,23 @@ if __name__ == "__main__":
                  "Simulation6_ForearmReconstructedData"]
     in_vitro = ["Phantom1_flow_phantom_no_melanin",
                 "Phantom2_flow_phantom_medium_melanin"]
+    datasets = ['Phantom1_flow_phantom_medium_melanin']
     for SET_NAME in datasets:
-        SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\processed_spectra/{SET_NAME}_processed.png"
-        compute_spectra_plot(SET_NAME, save_name=SAVE_PATH)
-    #     # SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\pca/test_sets/{SET_NAME[1]}_pca_{len(wavelengths)}.png"
-    #     if not os.path.exists(SAVE_PATH):
-    #         print(f"Generating PCA plot for {SET_NAME}...")
-    #         SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
-    #         # SPECTRA = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_vitro/{SET_NAME[1]}/{SET_NAME[1]}.npz"
-    #         r_wavelengths, r_oxygenations, r_spectra, \
-    #         r_melanin_concentration, r_background_oxygenation, \
-    #         r_distances, r_depths, r_pca_components = p.load_spectra_file(SPECTRA)
-    #         # r_spectra = v.filter_wavelengths(r_spectra)
-    #         spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
-    #         # compute_pca_plot(spectra, r_oxygenations, wavelengths, plot_title=f"{SET_NAME}", save_path=SAVE_PATH)
-    #         compute_spectra_plot(spectra, r_oxygenations, r_melanin_concentration, r_distances, r_depths, num_samples=300, normalise=False)
-    #     else:
-    #         print(f"{SET_NAME}_pca.png already exists.")
+        # SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\processed_spectra/{SET_NAME}_processed.png"
+        # compute_spectra_plot(SET_NAME, save_name=SAVE_PATH)
+        SAVE_PATH = f"I:/research\seblab\data\group_folders\Kylie\images\pca/{SET_NAME}_pca_{len(wavelengths)}.png"
+        if not os.path.exists(SAVE_PATH):
+            print(f"Generating PCA plot for {SET_NAME}...")
+            # SPECTRA = f"I:/research\seblab\data\group_folders\Kylie\datasets/{SET_NAME}/{SET_NAME}_spectra.npz"
+            SPECTRA = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_vitro/{SET_NAME}/{SET_NAME}.npz"
+            r_wavelengths, r_oxygenations, r_spectra, \
+            r_melanin_concentration, r_background_oxygenation, \
+            r_distances, r_depths = p.load_spectra_file(SPECTRA)
+            # r_spectra = v.filter_wavelengths(r_spectra)
+            spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, r_spectra)
+            compute_pca_plot(spectra, r_oxygenations, wavelengths, plot_title=f"{SET_NAME}", save_path=SAVE_PATH)
+        else:
+            print(f"{SET_NAME}_pca.png already exists.")
 
 ### Kylie
     # baseline_spectra = np.apply_along_axis(p.normalise_sum_to_one, 0, v.filter_wavelengths(r_spectra))  # normalise

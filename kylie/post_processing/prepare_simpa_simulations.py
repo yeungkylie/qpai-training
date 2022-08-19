@@ -11,6 +11,7 @@ from kylie.post_processing import postprocessing as pp
 from kylie.training import train_random_forest as trf
 
 
+
 start_time = time.time()
 
 def normalise_sum_to_one(a):
@@ -237,7 +238,7 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
             plt.ylabel("Coloured by sO2 value")
         plt.title(f"{lower_so2_bound * 100:3.1f}% to {upper_so2_bound * 100:3.1f}%")
         for idx in range(len(so2_bracket_oxygenation_values)):
-            plt.plot(np.linspace(700, 900, 41), so2_bracket_spectra[:, idx],
+            plt.plot(np.linspace(700, 900, 11), so2_bracket_spectra[:, idx],
                      color=mpl.cm.viridis(so2_bracket_oxygenation_values[idx]), linewidth=2, alpha=0.05)
         if sO2_bracket == num_sO2_brackets - 1:
             norm = mpl.colors.Normalize(vmin=0, vmax=100)
@@ -252,7 +253,7 @@ def visualise_spectra(spectra, oxy, melanin, distances, depths, num_sO2_brackets
             plt.xlabel("Wavelength [nm]")
             plt.ylabel("Coloured by Spectral Colouring")
         for idx in range(len(so2_bracket_colouring)):
-            plt.plot(np.linspace(700, 900, 41), so2_bracket_spectra[:, idx],
+            plt.plot(np.linspace(700, 900, 11), so2_bracket_spectra[:, idx],
                      color=mpl.cm.magma(so2_bracket_colouring[idx]), linewidth=2, alpha=0.05)
 
         if sO2_bracket == num_sO2_brackets - 1:
@@ -306,21 +307,37 @@ def extract_spectra(SET_NAME, acoustic=False):
     # visualise_PCA(r_pca_components, r_depths)
 
 if __name__ == "__main__":
-    datasets = [
-                # "Baseline",
-                # "0.6mm Res", "1.2mm Res",
-                # "5mm Illumination",
-                "Point Illumination",
-                "BG 60-80", "BG 0-100",
-                "Heterogeneous with vessels",
-                # "Heterogeneous 60-80",
-                # "Heterogeneous 0-100",
-                "High Res", "HighRes SmallVess",
-                "Skin", "Acoustic", "SmallVess"]
-
-    for dataset in datasets:
-        extract_spectra(dataset)
-
-    test_datasets = []
+    # datasets = [
+    #             # "Baseline",
+    #             # "0.6mm Res", "1.2mm Res",
+    #             # "5mm Illumination",
+    #             "Point Illumination",
+    #             "BG 60-80", "BG 0-100",
+    #             "Heterogeneous with vessels",
+    #             # "Heterogeneous 60-80",
+    #             # "Heterogeneous 0-100",
+    #             "High Res", "HighRes SmallVess",
+    #             "Skin", "Acoustic", "SmallVess"]
+    #
+    # for dataset in datasets:
+    #     extract_spectra(dataset)
+    #
+    # test_datasets = []
+    in_silico = [
+        "Simulation1_SingleVesselInWater",
+        "Simulation2_SingleVesselInBlood",
+        "Simulation3_VesselDeepInWater",
+        "Simulation4_HeterogeneousDistribution",
+        "Simulation5_ForearmInitialPressure",
+        "Simulation6_ForearmReconstructedData"]
+    in_vitro = ["Phantom1_flow_phantom_no_melanin",
+                "Phantom2_flow_phantom_medium_melanin"]
+    for test_data in in_vitro:
+        IN_FILE = f"I:/research\seblab\data\group_folders\Janek\learned_pa_oximetry/validation_data\in_vitro/{test_data}/{test_data}.npz"
+        r_wavelengths, oxy, r_spectra, \
+        r_melanin_concentration, r_background_oxygenation, \
+        distances, depths = load_spectra_file(IN_FILE)
+        SAVE_NAME = f"{test_data}"
+        visualise_spectra(r_spectra,oxy,r_melanin_concentration,distances,depths,num_samples=300, normalise=True, save_name=SAVE_NAME)
 
     print("--- %s seconds ---" % (time.time() - start_time))
